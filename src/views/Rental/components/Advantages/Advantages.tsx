@@ -63,9 +63,9 @@ const Advantages = (): JSX.Element => {
         </Typography>
         <Typography
           variant="h6"
-          align={'center'}
           color={'text.secondary'}
           data-aos={'fade-up'}
+          sx={{ textAlign: { xs: 'left', md: 'center' } }}
         >
           Prozkoumejte místa v okolí na kole nebo pěšky.
           <br />

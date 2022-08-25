@@ -4,6 +4,7 @@ import Paper from '@mui/material/Paper';
 import CssBaseline from '@mui/material/CssBaseline';
 import getTheme from 'theme';
 import AOS from 'aos';
+import { ReservationProvider } from '../context/ReservationContext';
 
 export const useDarkMode = (): [string, () => void, boolean] => {
   const [themeMode, setTheme] = useState('light');
@@ -64,10 +65,12 @@ export default function Page({ children }: Props): JSX.Element {
   }, [mountedComponent, themeMode]);
 
   return (
-    <ThemeProvider theme={getTheme(themeMode, themeToggler)}>
-      {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-      <CssBaseline />
-      <Paper elevation={0}>{children}</Paper>
-    </ThemeProvider>
+    <ReservationProvider>
+      <ThemeProvider theme={getTheme(themeMode, themeToggler)}>
+        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+        <CssBaseline />
+        <Paper elevation={0}>{children}</Paper>
+      </ThemeProvider>
+    </ReservationProvider>
   );
 }

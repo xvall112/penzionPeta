@@ -111,13 +111,25 @@ const Teaser = (): JSX.Element => {
           xs={12}
           md={6}
         >
-          <StaticImage
-            src="../../../../images/house.jpg"
-            alt="Domecek Jalovci"
-            width={500}
-            height={500}
-            style={{ borderRadius: '10px' }}
-          />
+          <Box
+            sx={{
+              borderRadius: '10px',
+              WebkitBorderRadius: '10px',
+              overflow: 'hidden',
+              '& img': {
+                borderRadius: '10px',
+                WebkitBorderRadius: '10px',
+              },
+            }}
+          >
+            <StaticImage
+              src="../../../../images/house.jpg"
+              alt="Domecek Jalovci"
+              width={500}
+              height={500}
+              style={{ borderRadius: '10px', WebkitBorderRadius: '10px' }}
+            />
+          </Box>
         </Grid>
       </Grid>
     </Box>

@@ -5,11 +5,11 @@ import SEO from '../components/Seo';
 const IndexPage = (): JSX.Element => {
   return (
     <>
-      <Rental />
       <SEO
         title="Petra Dědinová"
         description="Ubytování v penzionu Domeček Jalovčí"
       />
+      <Rental />
     </>
   );
 };

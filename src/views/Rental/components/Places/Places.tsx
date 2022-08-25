@@ -141,54 +141,66 @@ const Places = (): JSX.Element => {
           </Box>
         </Box>
       </Box> */}
-      <Grid container spacing={4}>
-        <Grid item xs={12} md={6}>
-          <StaticImage
-            layout={'fullWidth'}
-            height={500}
-            src="../../../../images/pool.jpg"
-            alt="..."
-            style={{ borderRadius: '10px' }}
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <StaticImage
-            layout={'fullWidth'}
-            height={500}
-            src="../../../../images/house.jpg"
-            alt="..."
-            style={{ borderRadius: '10px' }}
-          />
-        </Grid>
+      <Box
+        sx={{
+          borderRadius: '10px',
+          WebkitBorderRadius: '10px',
+          overflow: 'hidden',
+          '& img': {
+            borderRadius: '10px',
+            WebkitBorderRadius: '10px',
+          },
+        }}
+      >
+        <Grid container spacing={4}>
+          <Grid item xs={12} md={6}>
+            <StaticImage
+              layout={'fullWidth'}
+              height={500}
+              src="../../../../images/pool.jpg"
+              alt="..."
+              style={{ borderRadius: '10px' }}
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <StaticImage
+              layout={'fullWidth'}
+              height={500}
+              src="../../../../images/house.jpg"
+              alt="..."
+              style={{ borderRadius: '10px' }}
+            />
+          </Grid>
 
-        <Grid item xs={12} md={6}>
-          <StaticImage
-            layout={'fullWidth'}
-            height={500}
-            src="../../../../images/titleImage.jpg"
-            alt="..."
-            style={{ borderRadius: '10px' }}
-          />
+          <Grid item xs={12} md={6}>
+            <StaticImage
+              layout={'fullWidth'}
+              height={500}
+              src="../../../../images/titleImage.jpg"
+              alt="..."
+              style={{ borderRadius: '10px' }}
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <StaticImage
+              layout={'fullWidth'}
+              height={500}
+              src="../../../../images/sunset.jpg"
+              alt="..."
+              style={{ borderRadius: '10px' }}
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <StaticImage
+              layout={'fullWidth'}
+              height={500}
+              src="../../../../images/seroundings.jpg"
+              alt="..."
+              style={{ borderRadius: '10px' }}
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={6}>
-          <StaticImage
-            layout={'fullWidth'}
-            height={500}
-            src="../../../../images/sunset.jpg"
-            alt="..."
-            style={{ borderRadius: '10px' }}
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <StaticImage
-            layout={'fullWidth'}
-            height={500}
-            src="../../../../images/seroundings.jpg"
-            alt="..."
-            style={{ borderRadius: '10px' }}
-          />
-        </Grid>
-      </Grid>
+      </Box>
       {/*  {viewerIsOpen && (
         <Lightbox
           mainSrc={photos[currentImage].src}

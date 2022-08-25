@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Box from '@mui/material/Box';
 import { Link } from 'gatsby';
 import { Button, Typography } from '@mui/material';
@@ -10,6 +10,7 @@ import PhoneIcon from '@mui/icons-material/Phone';
 
 import { NavItem } from './components';
 
+import { ReservationContext } from '../../../../context/ReservationContext';
 interface Props {
   // eslint-disable-next-line @typescript-eslint/ban-types
   onSidebarOpen: () => void;
@@ -29,6 +30,7 @@ const Topbar = ({
   pages,
   colorInvert = false,
 }: Props): JSX.Element => {
+  const { handleClickOpen } = useContext(ReservationContext);
   const theme = useTheme();
   const { mode } = theme.palette;
   const {
@@ -68,7 +70,7 @@ const Topbar = ({
         </Box>
       </Box>
       <Box sx={{ display: { xs: 'flex', md: 'none' } }} alignItems={'center'}>
-        <Box mr={2}>
+        <Box mr={1}>
           <Button
             component={'a'}
             href="mailto:petradedinova95@gmail.com"
@@ -105,7 +107,7 @@ const Topbar = ({
       >
         <Box component="a">
           <Typography variant="h6" fontWeight={700}>
-            email: petradedinova95@gmail.com
+            Email: petradedinova95@gmail.com
           </Typography>
         </Box>
         <Box marginLeft={4} component="a">
@@ -116,7 +118,12 @@ const Topbar = ({
         </Box>
       </Box>
       <Box marginLeft={1}>
-        <Button variant="contained" color="primary" size="large">
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          onClick={handleClickOpen}
+        >
           REZERVOVAT
         </Button>
       </Box>

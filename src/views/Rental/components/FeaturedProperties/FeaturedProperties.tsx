@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -9,6 +9,7 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import { ReservationContext } from '../../../../context/ReservationContext';
 
 const mock = [
   {
@@ -16,7 +17,7 @@ const mock = [
     title: 'Pokoj 1',
 
     price: '1000 Kč/noc',
-    size: '40',
+    size: '20',
     location: '2 lůžka, oddělené postele, TV, sociální zařízení',
   },
   {
@@ -24,7 +25,7 @@ const mock = [
     title: 'Pokoj 2',
     time: '11:30 AM - 1:00 AM',
     price: '1000 Kč/noc',
-    size: '30',
+    size: '20',
     location: '2 lůžka, manželská postel, TV, sociální zařízení',
   },
   {
@@ -32,7 +33,7 @@ const mock = [
     title: 'Pokoj 3',
 
     price: '1000 Kč/noc',
-    size: '50',
+    size: '20',
     location: '2 lůžka, oddělené postele, TV, sociální zařízení',
   },
 ];
@@ -42,7 +43,7 @@ const FeaturedProperties = (): JSX.Element => {
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
-
+  const { handleClickOpen } = useContext(ReservationContext);
   return (
     <Box>
       <Box marginBottom={4}>
@@ -203,6 +204,7 @@ const FeaturedProperties = (): JSX.Element => {
               color="primary"
               size="large"
               fullWidth={isMd ? false : true}
+              onClick={handleClickOpen}
             >
               Rezervuj si svůj pokoj
             </Button>

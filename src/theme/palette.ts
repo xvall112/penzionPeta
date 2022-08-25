@@ -8,15 +8,15 @@ export const light = {
   cardShadow: 'rgba(23, 70, 161, .11)',
   mode: 'light' as PaletteMode,
   primary: {
-    main: '#377dff',
-    light: '#467de3',
-    dark: '#2f6ad9',
+    main: '#BDB76B',
+    light: '#F1E99A',
+    dark: '#8B873E',
     contrastText: '#fff',
   },
   secondary: {
-    light: '#ffb74d',
-    main: '#f9b934',
-    dark: '#FF9800',
+    light: '#e7debe',
+    main: '#c3af91',
+    dark: '#ab9370',
     contrastText: 'rgba(0, 0, 0, 0.87)',
   },
   text: {

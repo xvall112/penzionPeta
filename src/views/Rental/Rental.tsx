@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 
 import Main from 'layouts/Main';
 import Container from 'components/Container';
-
+import KontaktDialog from '../../components/KontaktDialog';
 import {
   Advantages,
   Articles,
@@ -20,6 +20,7 @@ import {
 const Rental = (): JSX.Element => {
   return (
     <Main colorInvert={true}>
+      <KontaktDialog />
       <Hero />
       <Box bgcolor={'alternate.main'}>
         <Container>

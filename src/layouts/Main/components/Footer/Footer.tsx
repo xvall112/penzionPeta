@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
+import { ReservationContext } from '../../../../context/ReservationContext';
 
 const Footer = (): JSX.Element => {
   const theme = useTheme();
   const { mode } = theme.palette;
-
+  const { handleClickOpen } = useContext(ReservationContext);
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
@@ -20,9 +21,18 @@ const Footer = (): JSX.Element => {
           width={1}
           flexDirection={{ xs: 'column', sm: 'row' }}
         >
-          <Box display={'flex'} title="Domeček Jalovčí">
-            <h3>Domeček Jalovčí</h3>
-          </Box>
+          <Grid container direction="column" spacing={0}>
+            <Grid item>
+              <h3>Domeček Jalovčí</h3>
+            </Grid>
+
+            <Grid item>Třtí 21</Grid>
+            <Grid item>Dolní Hbity</Grid>
+            <Grid item>262 63</Grid>
+            <Grid item>
+              <h5>Petra Dědinová</h5>
+            </Grid>
+          </Grid>
           <Box display="flex" flexWrap={'wrap'} alignItems={'center'}>
             <Box marginTop={1}>
               <Button
@@ -30,6 +40,7 @@ const Footer = (): JSX.Element => {
                 color="primary"
                 target="blank"
                 size="small"
+                onClick={handleClickOpen}
               >
                 REZERVOVAT
               </Button>
