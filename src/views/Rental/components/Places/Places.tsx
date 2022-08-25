@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { StaticImage } from 'gatsby-plugin-image';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Lightbox from 'react-image-lightbox';
 import { useTheme } from '@mui/material/styles';
@@ -8,6 +9,7 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
 
 const Places = (): JSX.Element => {
   const theme = useTheme();
@@ -30,26 +32,26 @@ const Places = (): JSX.Element => {
 
   const photos = [
     {
-      src: 'https://assets.maccarianagency.com/backgrounds/img30.jpg',
-      source: 'https://assets.maccarianagency.com/backgrounds/img30.jpg',
+      src: '../../../../images/pool.jpg',
+      source: '../../../../images/pool.jpg',
       rows: 1,
       cols: 2,
     },
     {
-      src: 'https://assets.maccarianagency.com/backgrounds/img31.jpg',
-      source: 'https://assets.maccarianagency.com/backgrounds/img31.jpg',
+      src: '../../../../images/pool.jpg',
+      source: '../../../../images/pool.jpg',
       rows: 1,
       cols: 1,
     },
     {
-      src: 'https://assets.maccarianagency.com/backgrounds/img29.jpg',
-      source: 'https://assets.maccarianagency.com/backgrounds/img29.jpg',
+      src: '../../../../images/pool.jpg',
+      source: '../../../../images/pool.jpg',
       rows: 1,
       cols: 1,
     },
     {
-      src: 'https://assets.maccarianagency.com/backgrounds/img28.jpg',
-      source: 'https://assets.maccarianagency.com/backgrounds/img28.jpg',
+      src: '../../../../images/pool.jpg',
+      source: '../../../../images/pool.jpg',
       rows: 1,
       cols: 2,
     },
@@ -59,7 +61,7 @@ const Places = (): JSX.Element => {
 
   return (
     <Box>
-      <Box marginBottom={4}>
+      {/* <Box marginBottom={4}>
         <Typography
           sx={{
             textTransform: 'uppercase',
@@ -138,48 +140,72 @@ const Places = (): JSX.Element => {
             Open the gallery
           </Box>
         </Box>
-      </Box>
-      <Box>
-        <ImageList
-          variant="quilted"
-          cols={3}
-          rowHeight={isMd ? 300 : 220}
-          gap={isMd ? 16 : 8}
-        >
-          {photosToShow.map((item, i) => (
-            <ImageListItem
-              key={i}
-              cols={isMd ? item.cols || 1 : 3}
-              rows={isMd ? item.rows || 1 : 1}
-            >
-              <LazyLoadImage
-                height={'100%'}
-                width={'100%'}
-                src={item.src}
-                alt="..."
-                effect="blur"
-                onClick={() => openLightbox(i)}
-                style={{
-                  objectFit: 'cover',
-                  cursor: 'poiner',
-                  borderRadius: 8,
-                }}
-              />
-            </ImageListItem>
-          ))}
-        </ImageList>
-      </Box>
-      {viewerIsOpen && (
+      </Box> */}
+      <Grid container spacing={4}>
+        <Grid item xs={12} md={6}>
+          <StaticImage
+            layout={'fullWidth'}
+            height={500}
+            src="../../../../images/pool.jpg"
+            alt="..."
+            style={{ borderRadius: '10px' }}
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <StaticImage
+            layout={'fullWidth'}
+            height={500}
+            src="../../../../images/house.jpg"
+            alt="..."
+            style={{ borderRadius: '10px' }}
+          />
+        </Grid>
+
+        <Grid item xs={12} md={6}>
+          <StaticImage
+            layout={'fullWidth'}
+            height={500}
+            src="../../../../images/titleImage.jpg"
+            alt="..."
+            style={{ borderRadius: '10px' }}
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <StaticImage
+            layout={'fullWidth'}
+            height={500}
+            src="../../../../images/sunset.jpg"
+            alt="..."
+            style={{ borderRadius: '10px' }}
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <StaticImage
+            layout={'fullWidth'}
+            height={500}
+            src="../../../../images/seroundings.jpg"
+            alt="..."
+            style={{ borderRadius: '10px' }}
+          />
+        </Grid>
+      </Grid>
+      {/*  {viewerIsOpen && (
         <Lightbox
           mainSrc={photos[currentImage].src}
           nextSrc={photos[(currentImage + 1) % photos.length].src}
-          prevSrc={photos[(currentImage + photos.length - 1) % photos.length].src}
+          prevSrc={
+            photos[(currentImage + photos.length - 1) % photos.length].src
+          }
           onCloseRequest={() => closeLightbox()}
-          onMovePrevRequest={() => setCurrentImage((currentImage + photos.length - 1) % photos.length)}
-          onMoveNextRequest={() => setCurrentImage((currentImage + 1) % photos.length)}
+          onMovePrevRequest={() =>
+            setCurrentImage((currentImage + photos.length - 1) % photos.length)
+          }
+          onMoveNextRequest={() =>
+            setCurrentImage((currentImage + 1) % photos.length)
+          }
           reactModalStyle={{ overlay: { zIndex: 1500 } }}
         />
-      )}
+      )} */}
     </Box>
   );
 };

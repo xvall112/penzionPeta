@@ -26,11 +26,12 @@ const Search = (): JSX.Element => {
           align={'center'}
           data-aos={'fade-up'}
         >
-          Nabízíme Vám ubytování v jednoduše zařízených pokojích s vlastním
-          sociálním zařízením. <br />U domečku nechybí posezení na venkovní
-          terase s krásným výhledem na krajinu.
+          Nabízíme Vám ubytování a agroturistiku v malebné vesničce Třtí-Jalovčí
+          v mále zemědělské usedlosti. <br />
+          Jalovčí se nachází ve Středočeském kraji nedaleko Kamýku nad Vltavou.{' '}
+          <br />U domečku nechybí posezení na venkovní terase s krásným výhledem
+          na krajinu.
           <br />
-          Na pozemku je hřiště, gril, bazén, sauna.
         </Typography>
       </Box>
       <Grid container spacing={4}>

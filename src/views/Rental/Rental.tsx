@@ -29,9 +29,9 @@ const Rental = (): JSX.Element => {
       <Container>
         <Teaser />
       </Container>
-      <Container sx={{ paddingTop: '0 !important' }}>
+      {/*   <Container sx={{ paddingTop: '0 !important' }}>
         <Articles />
-      </Container>
+      </Container> */}
       <Box bgcolor={'alternate.main'}>
         <Container>
           <FeaturedProperties />
@@ -40,22 +40,22 @@ const Rental = (): JSX.Element => {
       <Container>
         <Places />
       </Container>
-      <Box bgcolor={'alternate.main'}>
+      {/* <Box bgcolor={'alternate.main'}>
         <Container>
           <Reviews />
         </Container>
-      </Box>
-      <Container>
+      </Box> */}
+      {/* <Container>
         <Partners />
-      </Container>
+      </Container> */}
       <Box bgcolor={'alternate.main'}>
         <Container>
           <Advantages />
         </Container>
       </Box>
-      <Container>
+      {/*  <Container>
         <AskExpert />
-      </Container>
+      </Container> */}
     </Main>
   );
 };

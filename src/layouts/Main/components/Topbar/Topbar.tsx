@@ -3,7 +3,10 @@ import Box from '@mui/material/Box';
 import { Link } from 'gatsby';
 import { Button, Typography } from '@mui/material';
 import { alpha, useTheme } from '@mui/material/styles';
+
 import MenuIcon from '@mui/icons-material/Menu';
+import EmailIcon from '@mui/icons-material/Email';
+import PhoneIcon from '@mui/icons-material/Phone';
 
 import { NavItem } from './components';
 
@@ -47,35 +50,43 @@ const Topbar = ({
       <Box
         display={'flex'}
         component={Link}
-        href="/"
+        to={'/'}
         width={{ xs: 100, md: 120 }}
+        sx={{ textDecoration: 'none' }}
       >
         <Box height={1} width={1}>
           <Typography
             variant="h4"
             gutterBottom
+            color="primary"
             sx={{
               fontWeight: 900,
-              color: 'common.white',
             }}
           >
             DJ
           </Typography>
         </Box>
       </Box>
-      <Box sx={{ display: { xs: 'none', md: 'flex' } }} alignItems={'center'}>
-        <Box>Email</Box>
-        <Box marginLeft={4}>Tel</Box>
-
-        <Box marginLeft={4}>
-          <Button variant="contained" color="primary" size="large">
-            REZERVOVAT
+      <Box sx={{ display: { xs: 'flex', md: 'none' } }} alignItems={'center'}>
+        <Box mr={2}>
+          <Button
+            component={'a'}
+            href="mailto:petradedinova95@gmail.com"
+            aria-label="Menu"
+            variant={'outlined'}
+            sx={{
+              borderRadius: 2,
+              minWidth: 'auto',
+              padding: 1,
+              borderColor: alpha(theme.palette.divider, 0.2),
+            }}
+          >
+            <EmailIcon />
           </Button>
         </Box>
-      </Box>
-      <Box sx={{ display: { xs: 'flex', md: 'none' } }} alignItems={'center'}>
         <Button
-          onClick={() => onSidebarOpen()}
+          component={'a'}
+          href="tel:725001393"
           aria-label="Menu"
           variant={'outlined'}
           sx={{
@@ -85,7 +96,28 @@ const Topbar = ({
             borderColor: alpha(theme.palette.divider, 0.2),
           }}
         >
-          <MenuIcon />
+          <PhoneIcon />
+        </Button>
+      </Box>
+      <Box
+        sx={{ display: { xs: 'none', md: 'flex' }, textDecoration: 'none' }}
+        alignItems={'center'}
+      >
+        <Box component="a">
+          <Typography variant="h6" fontWeight={700}>
+            email: petradedinova95@gmail.com
+          </Typography>
+        </Box>
+        <Box marginLeft={4} component="a">
+          <Typography variant="h6" fontWeight={700}>
+            {' '}
+            Tel: 725001393{' '}
+          </Typography>
+        </Box>
+      </Box>
+      <Box marginLeft={1}>
+        <Button variant="contained" color="primary" size="large">
+          REZERVOVAT
         </Button>
       </Box>
     </Box>

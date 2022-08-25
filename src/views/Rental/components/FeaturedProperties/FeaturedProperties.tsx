@@ -15,25 +15,25 @@ const mock = [
     media: 'https://assets.maccarianagency.com/backgrounds/img27.jpg',
     title: 'Pokoj 1',
 
-    price: '1000Kč/noc',
+    price: '1000 Kč/noc',
     size: '40',
-    location: '2 lůžka',
+    location: '2 lůžka, oddělené postele, TV, sociální zařízení',
   },
   {
-    media: 'https://assets.maccarianagency.com/backgrounds/img28.jpg',
-
+    media: 'https://assets.maccarianagency.com/backgrounds/img27.jpg',
+    title: 'Pokoj 2',
     time: '11:30 AM - 1:00 AM',
-    price: '1000Kč/noc',
+    price: '1000 Kč/noc',
     size: '30',
-    location: '2 lůžka',
+    location: '2 lůžka, manželská postel, TV, sociální zařízení',
   },
   {
-    media: 'https://assets.maccarianagency.com/backgrounds/img29.jpg',
+    media: 'https://assets.maccarianagency.com/backgrounds/img27.jpg',
     title: 'Pokoj 3',
 
-    price: '1000Kč/noc',
-    size: '20',
-    location: '2 lůžka',
+    price: '1000 Kč/noc',
+    size: '50',
+    location: '2 lůžka, oddělené postele, TV, sociální zařízení',
   },
 ];
 
@@ -125,30 +125,6 @@ const FeaturedProperties = (): JSX.Element => {
                         {item.price}
                       </Typography>
                     </Box>
-                    <Box
-                      padding={1}
-                      bgcolor={'background.paper'}
-                      boxShadow={1}
-                      borderRadius={2}
-                    >
-                      <Box
-                        component={'svg'}
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        width={16}
-                        height={16}
-                        color={'primary.main'}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                        />
-                      </Box>
-                    </Box>
                   </Box>
                 </CardMedia>
                 <CardContent>
@@ -206,7 +182,7 @@ const FeaturedProperties = (): JSX.Element => {
                       />
                     </Box>
                     <Typography variant={'subtitle2'} color="text.secondary">
-                      {item.size} m
+                      {item.size} {'\u33A1'}
                     </Typography>
                   </Box>
                 </CardContent>
@@ -228,7 +204,7 @@ const FeaturedProperties = (): JSX.Element => {
               size="large"
               fullWidth={isMd ? false : true}
             >
-              Rezervuj svůj pokoj
+              Rezervuj si svůj pokoj
             </Button>
           </Box>
         </Grid>

@@ -59,6 +59,7 @@ const Hero = (): JSX.Element => {
               sx={{
                 fontWeight: 900,
                 color: 'common.white',
+                textAlign: 'center',
               }}
             >
               Domeček Jalovčí

@@ -3,33 +3,75 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import ListItemText from '@mui/material/ListItemText';
+import Typography from '@mui/material/Typography';
 
 const mock = [
   {
-    title: 'Coworking communities',
+    title: 'Solenická podkova',
     subtitle:
-      'Connect in spaces designed to bring incredible people together. Learn with them and take your project to new heights.',
+      'Solenická podkova, které se někdy říká také Zduchovická vyhlídka, nabízí pohled z výšky přibližně 150 metrů nad vodní hladinou. ',
+    link:
+      'https://www.kudyznudy.cz/aktivity/vyhlidka-solenicka-podkova-romanticky-vyhled-na',
   },
   {
-    title: 'Flexible contracts',
+    title: 'Svatý Jan Nepomucký nad Kamýkem',
     subtitle:
-      'Stay as little as 3 months with rolling contracts. Like it here? This is your space, so stay as long as you want.',
+      'Barokní poutní jednolodní kostel sv. Jana Nepomuckého s polygonálně ukončeným presbytářem z l. 1760 - 64 na symbolickém půdorysu hořícího srdce.',
+    link: 'https://www.turistika.cz/mista/svaty-jan-u-sedlcan/detail',
   },
   {
-    title: 'All inclusive',
+    title: 'Zřícenina hradu Vrškamýk',
     subtitle:
-      'Monthly fee covers everything you need hassle free. Keep cool and focus on what matters to you.',
+      'Vrškamýk je zřícenina hradu nacházející se jeden kilometr západně od obce Kamýk nad Vltavou v okrese Příbram.',
+    link:
+      'https://www.kudyznudy.cz/aktivity/zricenina-hradu-vrskamyk-hunec-v-kamyku-nad-vlta',
   },
   {
-    title: 'Hospitality service',
+    title: 'Rozhledna Milada',
     subtitle:
-      '24/7 support. No more hidden prices. It is your workingplace, playground, relax room.',
+      'Rozhledna má devět pater a jméno získala po mamince Radomila Kessla, který je autorem a provozovatelem věže. Téměř 30 m vysoká věž',
+    link:
+      'https://www.kudyznudy.cz/aktivity/rozhledna-milada-u-orlicke-prehrady',
   },
 ];
 
 const Advantages = (): JSX.Element => {
   return (
     <Box>
+      <Box marginBottom={8}>
+        <Typography
+          sx={{
+            textTransform: 'uppercase',
+            fontWeight: 'medium',
+          }}
+          gutterBottom
+          color={'secondary'}
+          align={'center'}
+        >
+          Místa
+        </Typography>
+        <Typography
+          variant="h4"
+          align={'center'}
+          data-aos={'fade-up'}
+          gutterBottom
+          sx={{
+            fontWeight: 700,
+          }}
+        >
+          Objevujte krásná místa v okolí
+        </Typography>
+        <Typography
+          variant="h6"
+          align={'center'}
+          color={'text.secondary'}
+          data-aos={'fade-up'}
+        >
+          Prozkoumejte místa v okolí na kole nebo pěšky.
+          <br />
+          Připravili jsme pro Vás přehled míst, které stojí za návštěvu
+        </Typography>
+      </Box>
       <Grid container spacing={4}>
         {mock.map((item, i) => (
           <Grid
@@ -54,6 +96,8 @@ const Advantages = (): JSX.Element => {
             <Box sx={{ flexGrow: 1 }} />
             <Box marginTop={1}>
               <Button
+                component={'a'}
+                href={item.link}
                 endIcon={
                   <Box
                     component={'svg'}
@@ -73,7 +117,7 @@ const Advantages = (): JSX.Element => {
                   </Box>
                 }
               >
-                Learn More
+                Více
               </Button>
             </Box>
           </Grid>

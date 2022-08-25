@@ -85,12 +85,12 @@ const Main = ({
           />
         </Container>
       </AppBar>
-      <Sidebar
+      {/*  <Sidebar
         onClose={handleSidebarClose}
         open={open}
         variant="temporary"
         pages={pages}
-      />
+      /> */}
       <main>
         {children}
         <Divider />
