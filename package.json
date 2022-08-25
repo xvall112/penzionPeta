@@ -1,12 +1,12 @@
 {
-  "name": "Domecek Jalovci",
+  "name": "DomecekJalovci",
   "author": "Petra Dedinova",
   "email": "hi@maccarianagency.com",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "develop": "gatsby develop",
-    "build": "cross-env GENERATE_SOURCEMAP=false gatsby build",
+    "build": "gatsby build",
     "prettier:fix": "prettier './src/**/*.{tsx,ts}' --write",
     "eslint:fix": "eslint ./src --fix",
     "codeStyle:fix": "npm run prettier:fix && npm run eslint:fix",
