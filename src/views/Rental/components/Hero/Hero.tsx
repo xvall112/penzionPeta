@@ -54,14 +54,14 @@ const Hero = (): JSX.Element => {
             }}
           >
             <Typography
-              variant="h3"
+              variant="h1"
               gutterBottom
               sx={{
                 fontWeight: 900,
                 color: 'common.white',
               }}
             >
-              Need help selecting a rental service provider?
+              Domeček Jalovčí
             </Typography>
             {/* <Typography
               variant="h6"

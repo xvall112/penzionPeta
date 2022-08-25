@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+import { StaticImage } from 'gatsby-plugin-image';
 
 const Teaser = (): JSX.Element => {
   const theme = useTheme();
@@ -32,21 +33,20 @@ const Teaser = (): JSX.Element => {
               gutterBottom
               color={'secondary'}
             >
-              Flexible options
+              Ubytování
             </Typography>
             <Typography variant={'h4'} gutterBottom sx={{ fontWeight: 700 }}>
-              Don't worry about{' '}
+              Domeček{' '}
               <Typography color="primary" variant="inherit" component="span">
-                pricing
+                Jalovčí
               </Typography>
             </Typography>
             <Typography variant={'h6'} component={'p'} color={'text.secondary'}>
-              Three products that can be used independently or combined together
-              for your company’s needs.
+              Ubytování se nachází v krásne přírodě Středočeského kraje
               <br />
-              Don't listen to what they say go and see.
+              Celkem 6 lůžek
               <br />
-              Join the biggest community of people.
+              Vlastní sociální zařízení
             </Typography>
           </Box>
         </Grid>
@@ -58,20 +58,12 @@ const Teaser = (): JSX.Element => {
           xs={12}
           md={6}
         >
-          <Box maxWidth={490} width={1}>
-            <Box
-              component={'img'}
-              src={
-                'https://assets.maccarianagency.com/svg/illustrations/drawkit-illustration5.svg'
-              }
-              width={1}
-              height={1}
-              sx={{
-                filter:
-                  theme.palette.mode === 'dark' ? 'brightness(0.8)' : 'none',
-              }}
-            />
-          </Box>
+          <StaticImage
+            src="../../../../images/house.jpg"
+            alt="Domecek Jalovci"
+            width="100%"
+            height="500px"
+          />
         </Grid>
       </Grid>
     </Box>

@@ -18,7 +18,11 @@ interface Props {
   bgcolor?: string;
 }
 
-const Main = ({ children, colorInvert = false, bgcolor = 'transparent' }: Props): JSX.Element => {
+const Main = ({
+  children,
+  colorInvert = false,
+  bgcolor = 'transparent',
+}: Props): JSX.Element => {
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
@@ -43,7 +47,7 @@ const Main = ({ children, colorInvert = false, bgcolor = 'transparent' }: Props)
 
   return (
     <Box>
-      <Box bgcolor={bgcolor} position={'relative'} zIndex={theme.zIndex.appBar}>
+      {/* <Box bgcolor={bgcolor} position={'relative'} zIndex={theme.zIndex.appBar}>
         <Container
           paddingTop={'8px !important'}
           paddingBottom={'0 !important'}
@@ -64,7 +68,7 @@ const Main = ({ children, colorInvert = false, bgcolor = 'transparent' }: Props)
             </Box>
           </Box>
         </Container>
-      </Box>
+      </Box> */}
       <AppBar
         position={'sticky'}
         sx={{

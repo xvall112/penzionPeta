@@ -6,19 +6,17 @@ import ListItemText from '@mui/material/ListItemText';
 
 const mock = [
   {
-    title: 'Coworking communities',
-    subtitle:
-      'Connect in spaces designed to bring incredible people together. Learn with them and take your project to new heights.',
+    title: 'Gril',
+    subtitle: 'Plynoví gril k dispozici',
   },
   {
-    title: 'Flexible contracts',
+    title: 'Bazén',
     subtitle:
-      'Stay as little as 3 months with rolling contracts. Like it here? This is your space, so stay as long as you want.',
+      'Není nic lepšího než se v horkých dnech ochladit v bazénu s výhledem',
   },
   {
-    title: 'All inclusive',
-    subtitle:
-      'Monthly fee covers everything you need hassle free. Keep cool and focus on what matters to you.',
+    title: 'Sauna',
+    subtitle: 'V zimě ideální na regenaraci po dlouhé tůře',
   },
 ];
 
@@ -47,30 +45,6 @@ const Articles = (): JSX.Element => {
               }}
             />
             <Box sx={{ flexGrow: 1 }} />
-            <Box marginTop={1}>
-              <Button
-                endIcon={
-                  <Box
-                    component={'svg'}
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    width={24}
-                    height={24}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    />
-                  </Box>
-                }
-              >
-                Learn More
-              </Button>
-            </Box>
           </Grid>
         ))}
       </Grid>

@@ -18,7 +18,7 @@ const Search = (): JSX.Element => {
             fontWeight: 700,
           }}
         >
-          What is your real need?
+          Chcete poznat krásy Orlíku a jaho okolí?
         </Typography>
         <Typography
           variant="h6"
@@ -26,11 +26,11 @@ const Search = (): JSX.Element => {
           align={'center'}
           data-aos={'fade-up'}
         >
-          After 3 days all of your offers will arrive and you will have another
-          7 days to select your new company.
+          Nabízíme Vám ubytování v jednoduše zařízených pokojích s vlastním
+          sociálním zařízením. <br />U domečku nechybí posezení na venkovní
+          terase s krásným výhledem na krajinu.
           <br />
-          We make sure to include all the amenities and niceties that a growing
-          startup could possibly need.
+          Na pozemku je hřiště, gril, bazén, sauna.
         </Typography>
       </Box>
       <Grid container spacing={4}>
@@ -50,13 +50,15 @@ const Search = (): JSX.Element => {
             >
               <Box>
                 <Typography fontWeight={700} variant={'h6'} gutterBottom>
-                  I share a room
+                  Ubytování
                 </Typography>
-                <Typography>Over 20,000 users searching a place</Typography>
+                <Typography>
+                  3x dvoulůžkový pokoj s vlastním sociálním zařízení{' '}
+                </Typography>
               </Box>
               <Box display="flex" marginTop={{ xs: 2, md: 0 }}>
                 <Button variant="contained" size="large" color={'secondary'}>
-                  Search
+                  Více
                 </Button>
               </Box>
             </Box>
@@ -78,13 +80,13 @@ const Search = (): JSX.Element => {
             >
               <Box>
                 <Typography fontWeight={700} variant={'h6'} gutterBottom>
-                  I need a place
+                  Pronájem kol
                 </Typography>
-                <Typography>Over 20,000 users searching a place</Typography>
+                <Typography>4 horská kola k půjčení</Typography>
               </Box>
               <Box display="flex" marginTop={{ xs: 2, md: 0 }}>
                 <Button variant="contained" color="primary" size="large">
-                  Search
+                  Půjčit
                 </Button>
               </Box>
             </Box>

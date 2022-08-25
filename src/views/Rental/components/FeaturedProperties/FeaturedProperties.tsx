@@ -13,51 +13,27 @@ import { useTheme } from '@mui/material/styles';
 const mock = [
   {
     media: 'https://assets.maccarianagency.com/backgrounds/img27.jpg',
-    title: 'Cozy apartament',
-    time: '2:00 PM - 5:00 PM',
-    price: '$320.000',
-    size: '2.400',
-    location: 'Via E. Gola 4, 20147 Milan, Italy',
+    title: 'Pokoj 1',
+
+    price: '1000Kč/noc',
+    size: '40',
+    location: '2 lůžka',
   },
   {
     media: 'https://assets.maccarianagency.com/backgrounds/img28.jpg',
-    title: 'Villa with the pool',
+
     time: '11:30 AM - 1:00 AM',
-    price: '$450.000',
-    size: '2.800',
-    location: 'Via Venini 33, 20150 Milan Italy',
+    price: '1000Kč/noc',
+    size: '30',
+    location: '2 lůžka',
   },
   {
     media: 'https://assets.maccarianagency.com/backgrounds/img29.jpg',
-    title: 'Open space with garden',
-    time: '6:15 PM - 8:00 PM',
-    price: '$280.000',
-    size: '1.400',
-    location: 'Via Lagrange 5, 20175 Milan, Italy',
-  },
-  {
-    media: 'https://assets.maccarianagency.com/backgrounds/img30.jpg',
-    title: 'Fully renovated',
-    time: '6:15 PM - 8:00 PM',
-    price: '$300.000',
-    size: '2.100',
-    location: 'Via Lagrange 5, 20175 Milan, Italy',
-  },
-  {
-    media: 'https://assets.maccarianagency.com/backgrounds/img31.jpg',
-    title: 'Loft design',
-    time: '6:15 PM - 8:00 PM',
-    price: '$280.000',
-    size: '1.800',
-    location: 'Via Lagrange 5, 20175 Milan, Italy',
-  },
-  {
-    media: 'https://assets.maccarianagency.com/backgrounds/img32.jpg',
-    title: 'Vacation house',
-    time: '6:15 PM - 8:00 PM',
-    price: '$340.000',
-    size: '2.600',
-    location: 'Via Lagrange 5, 20175 Milan, Italy',
+    title: 'Pokoj 3',
+
+    price: '1000Kč/noc',
+    size: '20',
+    location: '2 lůžka',
   },
 ];
 
@@ -79,7 +55,7 @@ const FeaturedProperties = (): JSX.Element => {
           color={'secondary'}
           align={'center'}
         >
-          Featured Properties
+          Pokoje
         </Typography>
         <Typography
           variant="h4"
@@ -90,7 +66,7 @@ const FeaturedProperties = (): JSX.Element => {
             fontWeight: 700,
           }}
         >
-          Better way to find a property
+          Každý si najde to své
         </Typography>
         <Typography
           variant="h6"
@@ -98,10 +74,7 @@ const FeaturedProperties = (): JSX.Element => {
           color={'text.secondary'}
           data-aos={'fade-up'}
         >
-          Find vacation rentals, cabins, beach houses, unique homes and
-          experiences
-          <br />
-          around the world - all made possible by hosts on our website
+          Pokoje s vlastním sociálním zařízení
         </Typography>
       </Box>
       <Grid container spacing={4}>
@@ -233,33 +206,9 @@ const FeaturedProperties = (): JSX.Element => {
                       />
                     </Box>
                     <Typography variant={'subtitle2'} color="text.secondary">
-                      {item.size} Sq Ft
+                      {item.size} m
                     </Typography>
                   </Box>
-                  <CardActions sx={{ justifyContent: 'flex-end' }}>
-                    <Button
-                      endIcon={
-                        <Box
-                          component={'svg'}
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          width={24}
-                          height={24}
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M17 8l4 4m0 0l-4 4m4-4H3"
-                          />
-                        </Box>
-                      }
-                    >
-                      Learn More
-                    </Button>
-                  </CardActions>
                 </CardContent>
               </Box>
             </Box>
@@ -279,19 +228,8 @@ const FeaturedProperties = (): JSX.Element => {
               size="large"
               fullWidth={isMd ? false : true}
             >
-              Book a space
+              Rezervuj svůj pokoj
             </Button>
-            <Box
-              component={Button}
-              variant="outlined"
-              color="primary"
-              size="large"
-              marginTop={{ xs: 2, sm: 0 }}
-              marginLeft={{ sm: 2 }}
-              fullWidth={isMd ? false : true}
-            >
-              Explore more
-            </Box>
           </Box>
         </Grid>
       </Grid>
