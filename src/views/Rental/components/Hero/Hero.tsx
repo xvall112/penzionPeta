@@ -43,7 +43,6 @@ const Hero = (): JSX.Element => {
       />
       <Container position={'relative'} zIndex={2}>
         <Box
-          marginBottom={4}
           sx={{
             height: '70vh',
             display: 'flex',
@@ -75,7 +74,7 @@ const Hero = (): JSX.Element => {
               component="p"
               color="text.primary"
               sx={{
-                fontWeight: 700,
+                fontWeight: 400,
                 color: 'common.white',
                 textAlign: 'center',
               }}
@@ -84,10 +83,10 @@ const Hero = (): JSX.Element => {
               <br />v malé zemědělské usedlosti
             </Typography>
           </Box>
-          <Box pt={3}>
+          <Box pt={1}>
             <KeyboardArrowDownIcon
-              color="secondary"
               sx={{
+                color: 'common.white',
                 fontSize: 60,
               }}
             />

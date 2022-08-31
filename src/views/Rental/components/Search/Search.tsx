@@ -51,7 +51,7 @@ const Search = (): JSX.Element => {
               flexDirection={{ xs: 'column', sm: 'row' }}
             >
               <Box>
-                <Typography fontWeight={400} variant={'h6'} gutterBottom>
+                <Typography fontWeight={700} variant={'h6'} gutterBottom>
                   Ubytování
                 </Typography>
                 <Typography>
