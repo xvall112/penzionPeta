@@ -16,8 +16,8 @@ const mock = [
   {
     title: 'Svatý Jan Nepomucký nad Kamýkem',
     subtitle:
-      'Barokní poutní jednolodní kostel sv. Jana Nepomuckého s polygonálně ukončeným presbytářem z l. 1760 - 64 na symbolickém půdorysu hořícího srdce.',
-    link: 'https://www.turistika.cz/mista/svaty-jan-u-sedlcan/detail',
+      'Socha sv. Jana Nepomuckého umístěna na vyhlídce u řeky Vltavy. Znázorňuje ochránce všech lidí žijících u Vltavy.',
+    link: 'https://www.muzticha.cz/',
   },
   {
     title: 'Zřícenina hradu Vrškamýk',

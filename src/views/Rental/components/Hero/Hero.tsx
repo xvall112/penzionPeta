@@ -8,7 +8,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import InputAdornment from '@mui/material/InputAdornment';
-
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Container from 'components/Container';
 
 const Hero = (): JSX.Element => {
@@ -42,42 +42,57 @@ const Hero = (): JSX.Element => {
         }}
       />
       <Container position={'relative'} zIndex={2}>
-        <Box>
-          <Box
-            marginBottom={4}
-            data-aos="fade-up"
+        <Box
+          marginBottom={4}
+          sx={{
+            height: '70vh',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexDirection: 'column',
+          }}
+        >
+          <Typography
+            variant="h1"
+            gutterBottom
             sx={{
-              height: '50vh',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              fontWeight: 900,
+              color: 'common.white',
+              textAlign: 'center',
+            }}
+          >
+            Domeček Jalovčí
+          </Typography>
+          <Box
+            p={3}
+            sx={{
+              background: alpha(theme.palette.secondary.main, 0.5),
+              borderRadius: '10px',
             }}
           >
             <Typography
-              variant="h1"
-              gutterBottom
+              variant="h5"
+              component="p"
+              color="text.primary"
               sx={{
-                fontWeight: 900,
+                fontWeight: 700,
                 color: 'common.white',
                 textAlign: 'center',
               }}
             >
-              Domeček Jalovčí
+              Ubytování a agroturistika
+              <br />v malé zemědělské usedlosti
             </Typography>
-            {/* <Typography
-              variant="h6"
-              component="p"
-              color="text.primary"
-              sx={{
-                fontWeight: 400,
-                color: 'common.white',
-              }}
-            >
-              Let us guide you home.
-              <br />
-              Find the house of your dreams
-            </Typography> */}
           </Box>
+          <Box pt={3}>
+            <KeyboardArrowDownIcon
+              color="secondary"
+              sx={{
+                fontSize: 60,
+              }}
+            />
+          </Box>
+
           {/*    <Box
             padding={{ xs: 3, sm: 6 }}
             width={1}
