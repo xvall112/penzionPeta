@@ -6,7 +6,7 @@ const IndexPage = (): JSX.Element => {
   return (
     <>
       <SEO
-        title="Petra Dědinová"
+        title="Ubytování a agroturistika"
         description="Ubytování v penzionu Domeček Jalovčí"
       />
       <Rental />
