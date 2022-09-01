@@ -70,13 +70,14 @@ const Hero = (): JSX.Element => {
             }}
           >
             <Typography
-              variant="h5"
+              variant="h6"
               component="p"
               color="text.primary"
               sx={{
-                fontWeight: 400,
+                fontWeight: 700,
                 color: 'common.white',
                 textAlign: 'center',
+                textTransform: 'uppercase',
               }}
             >
               Ubytování a agroturistika
