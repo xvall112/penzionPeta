@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { ReservationContext } from '../../../../context/ReservationContext';
 
-const Search = (): JSX.Element => {
+const Search = ({ data }): JSX.Element => {
   const { handleClickOpen } = useContext(ReservationContext);
   return (
     <Box>
@@ -19,7 +19,7 @@ const Search = (): JSX.Element => {
             fontWeight: 700,
           }}
         >
-          Chcete poznat krásy Orlíku a jeho okolí?
+          {data.title}
         </Typography>
         <Typography
           variant="h6"
@@ -27,12 +27,7 @@ const Search = (): JSX.Element => {
           data-aos={'fade-up'}
           sx={{ textAlign: { xs: 'left', md: 'center' } }}
         >
-          Nabízíme Vám ubytování a agroturistiku v malebné vesničce Třtí-Jalovčí
-          v malé zemědělské usedlosti. <br />
-          Jalovčí se nachází ve Středočeském kraji nedaleko Kamýku nad Vltavou.{' '}
-          <br />U domečku nechybí posezení na venkovní terase s krásným výhledem
-          na krajinu.
-          <br />
+          {data.subtitle}
         </Typography>
       </Box>
       <Grid container spacing={4}>
@@ -98,7 +93,7 @@ const Search = (): JSX.Element => {
                   size="large"
                   onClick={handleClickOpen}
                 >
-                  Půjčit
+                  Více
                 </Button>
               </Box>
             </Box>

@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import { Link } from 'gatsby';
 import { Button, Typography } from '@mui/material';
 import { alpha, useTheme } from '@mui/material/styles';
-
+import InstagramIcon from '@mui/icons-material/Instagram';
 import MenuIcon from '@mui/icons-material/Menu';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
@@ -69,12 +69,29 @@ const Topbar = ({
           </Typography>
         </Box>
       </Box>
-      <Box sx={{ display: { xs: 'flex', md: 'none' } }} alignItems={'center'}>
+      <Box sx={{ display: { xs: 'flex' } }} alignItems={'center'}>
+        <Box mr={1}>
+          <Button
+            component={'a'}
+            href="instagram.com"
+            target="_blank"
+            aria-label="Instagram"
+            variant={'outlined'}
+            sx={{
+              borderRadius: 2,
+              minWidth: 'auto',
+              padding: 1,
+              borderColor: alpha(theme.palette.divider, 0.2),
+            }}
+          >
+            <InstagramIcon />
+          </Button>
+        </Box>
         <Box mr={1}>
           <Button
             component={'a'}
             href="mailto:petradedinova95@gmail.com"
-            aria-label="Menu"
+            aria-label="Email"
             variant={'outlined'}
             sx={{
               borderRadius: 2,
@@ -89,7 +106,7 @@ const Topbar = ({
         <Button
           component={'a'}
           href="tel:725001393"
-          aria-label="Menu"
+          aria-label="Telefon"
           variant={'outlined'}
           sx={{
             borderRadius: 2,
@@ -101,7 +118,7 @@ const Topbar = ({
           <PhoneIcon />
         </Button>
       </Box>
-      <Box
+      {/*  <Box
         sx={{ display: { xs: 'none', md: 'flex' }, textDecoration: 'none' }}
         alignItems={'center'}
       >
@@ -116,7 +133,7 @@ const Topbar = ({
             Tel: 725001393{' '}
           </Typography>
         </Box>
-      </Box>
+      </Box> */}
       <Box marginLeft={1}>
         <Button
           variant="contained"

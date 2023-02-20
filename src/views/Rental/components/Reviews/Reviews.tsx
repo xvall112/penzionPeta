@@ -32,6 +32,13 @@ const mock = [
     title: 'SEO at Comoti',
     avatar: 'https://assets.maccarianagency.com/avatars/img3.jpg',
   },
+  {
+    feedback:
+      'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    name: 'Chary Smith',
+    title: 'SEO at Comoti',
+    avatar: 'https://assets.maccarianagency.com/avatars/img3.jpg',
+  },
 ];
 
 const Reviews = (): JSX.Element => {
@@ -44,9 +51,32 @@ const Reviews = (): JSX.Element => {
     dots: !isMd,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
+    slidesToShow: 3,
     slidesToScroll: 1,
     arrows: isMd,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   return (
@@ -62,7 +92,10 @@ const Reviews = (): JSX.Element => {
           right: 0,
           height: '100%',
           backgroundSize: '18px 18px',
-          backgroundImage: `radial-gradient(${alpha(theme.palette.primary.dark, 0.4)} 20%, transparent 20%)`,
+          backgroundImage: `radial-gradient(${alpha(
+            theme.palette.primary.dark,
+            0.4,
+          )} 20%, transparent 20%)`,
           opacity: 0.2,
         },
       }}
@@ -105,9 +138,7 @@ const Reviews = (): JSX.Element => {
         <Box
           sx={{
             height: { xs: 'auto', md: 1 },
-            '& .slick-slide img': {
-              objectFit: 'cover',
-            },
+
             '& .slick-list, & .slick-slider, & .slick-track, & .slick-slide > div': {
               height: { xs: 'auto', md: 1 },
             },
@@ -129,69 +160,61 @@ const Reviews = (): JSX.Element => {
             '& .slick-prev': {
               marginLeft: theme.spacing(-7),
             },
+            '& .slick-slide > div': {
+              margin: '40px',
+            },
           }}
         >
           <Slider {...sliderOpts}>
             {mock.map((item, i) => (
-              <Box key={i}>
-                <Card
+              <Box
+                key={i}
+                component={Card}
+                boxShadow={4}
+                sx={{
+                  display: 'flex',
+                  flexDirection: { xs: 'column', md: 'row' },
+                }}
+              >
+                <CardContent
                   sx={{
                     display: 'flex',
-                    flexDirection: { xs: 'column', md: 'row' },
-                    boxShadow: 0,
-                    background: 'transparent',
+                    alignItems: 'center',
+                    marginLeft: { sx: 0, md: 2 },
                   }}
                 >
-                  <CardMedia
-                    image={item.avatar}
-                    sx={{
-                      height: 300,
-                      width: '100%',
-                      maxWidth: 400,
-                      borderRadius: 2,
-                      margin: { xs: '0 auto', md: 'none' },
-                    }}
-                  />
-                  <CardContent
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      marginLeft: { sx: 0, md: 2 },
-                    }}
-                  >
-                    <Box>
-                      <Typography
-                        color="text.primary"
-                        variant={'h6'}
-                        sx={{
-                          textAlign: { xs: 'center', md: 'left' },
+                  <Box>
+                    <Typography
+                      color="text.primary"
+                      variant={'h6'}
+                      sx={{
+                        textAlign: { xs: 'center', md: 'left' },
+                      }}
+                    >
+                      {item.feedback}
+                    </Typography>
+                    <ListItem
+                      component="div"
+                      disableGutters
+                      sx={{ padding: 0, marginTop: 2 }}
+                    >
+                      <ListItemText
+                        sx={{ margin: 0 }}
+                        primary={item.name}
+                        secondary={item.title}
+                        primaryTypographyProps={{
+                          variant: 'h6',
+                          fontWeight: 'bold',
+                          sx: { textAlign: { xs: 'center', md: 'left' } },
                         }}
-                      >
-                        {item.feedback}
-                      </Typography>
-                      <ListItem
-                        component="div"
-                        disableGutters
-                        sx={{ padding: 0, marginTop: 2 }}
-                      >
-                        <ListItemText
-                          sx={{ margin: 0 }}
-                          primary={item.name}
-                          secondary={item.title}
-                          primaryTypographyProps={{
-                            variant: 'h6',
-                            fontWeight: 'bold',
-                            sx: { textAlign: { xs: 'center', md: 'left' } },
-                          }}
-                          secondaryTypographyProps={{
-                            variant: 'subtitle1',
-                            sx: { textAlign: { xs: 'center', md: 'left' } },
-                          }}
-                        />
-                      </ListItem>
-                    </Box>
-                  </CardContent>
-                </Card>
+                        secondaryTypographyProps={{
+                          variant: 'subtitle1',
+                          sx: { textAlign: { xs: 'center', md: 'left' } },
+                        }}
+                      />
+                    </ListItem>
+                  </Box>
+                </CardContent>
               </Box>
             ))}
           </Slider>

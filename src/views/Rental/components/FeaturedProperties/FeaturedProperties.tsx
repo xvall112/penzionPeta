@@ -1,4 +1,6 @@
 import React, { useContext } from 'react';
+import { GatsbyImage } from 'gatsby-plugin-image';
+import Slider from 'react-slick';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -11,39 +13,44 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { ReservationContext } from '../../../../context/ReservationContext';
 
-const mock = [
-  {
-    media: 'https://assets.maccarianagency.com/backgrounds/img27.jpg',
-    title: 'Pokoj 1',
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: 'block', right: 20 }}
+      onClick={onClick}
+    />
+  );
+}
 
-    price: '1000 Kč/noc',
-    size: '20',
-    location: '2 lůžka, oddělené postele, TV, sociální zařízení',
-  },
-  {
-    media: 'https://assets.maccarianagency.com/backgrounds/img27.jpg',
-    title: 'Pokoj 2',
-    time: '11:30 AM - 1:00 AM',
-    price: '1000 Kč/noc',
-    size: '20',
-    location: '2 lůžka, manželská postel, TV, sociální zařízení',
-  },
-  {
-    media: 'https://assets.maccarianagency.com/backgrounds/img27.jpg',
-    title: 'Pokoj 3',
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: 'block', left: 20, zIndex: 10 }}
+      onClick={onClick}
+    />
+  );
+}
 
-    price: '1000 Kč/noc',
-    size: '20',
-    location: '2 lůžka, oddělené postele, TV, sociální zařízení',
-  },
-];
-
-const FeaturedProperties = (): JSX.Element => {
+const FeaturedProperties = ({ data }): JSX.Element => {
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
   const { handleClickOpen } = useContext(ReservationContext);
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+    prevArrow: <SamplePrevArrow />,
+    nextArrow: <SampleNextArrow />,
+  };
   return (
     <Box>
       <Box marginBottom={4}>
@@ -56,7 +63,7 @@ const FeaturedProperties = (): JSX.Element => {
           color={'secondary'}
           align={'center'}
         >
-          Pokoje
+          {data.smallTitle}
         </Typography>
         <Typography
           variant="h4"
@@ -67,7 +74,7 @@ const FeaturedProperties = (): JSX.Element => {
             fontWeight: 700,
           }}
         >
-          Každý si najde to své
+          {data.title}
         </Typography>
         <Typography
           variant="h6"
@@ -75,11 +82,11 @@ const FeaturedProperties = (): JSX.Element => {
           color={'text.secondary'}
           data-aos={'fade-up'}
         >
-          Pokoje s vlastním sociálním zařízení
+          {data.subtitle}
         </Typography>
       </Box>
-      <Grid container spacing={4}>
-        {mock.map((item, i) => (
+      <Grid container spacing={4} justifyContent="center">
+        {data.rooms.map((room, i) => (
           <Grid
             item
             xs={12}
@@ -99,15 +106,57 @@ const FeaturedProperties = (): JSX.Element => {
                 display={'flex'}
                 flexDirection={'column'}
               >
-                <CardMedia
-                  title={item.title}
-                  image={item.media}
+                <Box
                   sx={{
                     position: 'relative',
-                    height: { xs: 240, sm: 340, md: 280 },
+                    height: 280,
                     overflow: 'hidden',
+                    '& .slick-prev': {
+                      display: 'block',
+                      left: 20,
+                      zIndex: 10,
+                    },
+                    '& .slick-next': {
+                      display: 'block',
+                      right: 20,
+                      zIndex: 10,
+                    },
+                    '& .slick-prev, & .slick-next': {
+                      width: 32,
+                      height: 32,
+                      '&:before': {
+                        fontSize: 32,
+                        color: 'common.white',
+                      },
+                    },
+                    '& .slick-dots': {
+                      bottom: '15px',
+                      '& li': { margin: '0px' },
+                      '& button:before': {
+                        color: 'white !important',
+                        fontSize: '10px',
+                      },
+                    },
                   }}
                 >
+                  <Slider {...settings}>
+                    {room?.images?.map((img, i) => {
+                      return (
+                        <Box height={'280px'}>
+                          <GatsbyImage
+                            key={i}
+                            image={img.gatsbyImageData}
+                            alt={img.title}
+                            style={{ width: '100%', height: '280px' }}
+                            imgStyle={{
+                              borderRadius: '10px 10px 0px 0px',
+                              WebkitBorderRadius: '10px 10px 0px 0px',
+                            }}
+                          />
+                        </Box>
+                      );
+                    })}
+                  </Slider>
                   <Box
                     display={'flex'}
                     justifyContent={'space-between'}
@@ -123,48 +172,20 @@ const FeaturedProperties = (): JSX.Element => {
                       borderRadius={2}
                     >
                       <Typography sx={{ fontWeight: 600 }}>
-                        {item.price}
+                        {room.price} Kč
                       </Typography>
                     </Box>
                   </Box>
-                </CardMedia>
+                </Box>
                 <CardContent>
                   <Typography
                     variant={'h6'}
                     align={'left'}
                     sx={{ fontWeight: 700 }}
                   >
-                    {item.title}
+                    {room.name}
                   </Typography>
                   <Box display={'flex'} alignItems={'center'} marginY={2}>
-                    <Box
-                      component={'svg'}
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      width={16}
-                      height={16}
-                      marginRight={1}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                    </Box>
-                    <Typography variant={'subtitle2'} color="text.secondary">
-                      {item.location}
-                    </Typography>
-                  </Box>
-                  <Box display={'flex'} alignItems={'center'}>
                     <Box
                       component={'svg'}
                       xmlns="http://www.w3.org/2000/svg"
@@ -183,33 +204,54 @@ const FeaturedProperties = (): JSX.Element => {
                       />
                     </Box>
                     <Typography variant={'subtitle2'} color="text.secondary">
-                      {item.size} {'\u33A1'}
+                      {room.describe}
                     </Typography>
                   </Box>
+                  {/*  <Box display={'flex'} alignItems={'center'}>
+                    <Box
+                      component={'svg'}
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      width={16}
+                      height={16}
+                      marginRight={1}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                      />
+                    </Box>
+                    <Typography variant={'subtitle2'} color="text.secondary">
+                      20 {'\u33A1'}
+                    </Typography>
+                  </Box> */}
                 </CardContent>
+                <CardActions>
+                  <Button
+                    size="small"
+                    variant="outlined"
+                    color="primary"
+                    fullWidth
+                  >
+                    Více info
+                  </Button>
+                  <Button
+                    size="small"
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                  >
+                    Rezervovat
+                  </Button>
+                </CardActions>
               </Box>
             </Box>
           </Grid>
         ))}
-        <Grid item xs={12}>
-          <Box
-            display="flex"
-            flexDirection={{ xs: 'column', sm: 'row' }}
-            alignItems={{ xs: 'stretched', sm: 'flex-start' }}
-            justifyContent={'center'}
-            marginTop={2}
-          >
-            <Button
-              variant="contained"
-              color="primary"
-              size="large"
-              fullWidth={isMd ? false : true}
-              onClick={handleClickOpen}
-            >
-              Rezervuj si svůj pokoj
-            </Button>
-          </Box>
-        </Grid>
       </Grid>
     </Box>
   );
