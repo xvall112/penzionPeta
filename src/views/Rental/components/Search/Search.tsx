@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import scrollTo from 'gatsby-plugin-smoothscroll';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
@@ -58,7 +59,7 @@ const Search = ({ data }): JSX.Element => {
                   variant="contained"
                   size="large"
                   color={'secondary'}
-                  onClick={handleClickOpen}
+                  onClick={() => scrollTo('#rental')}
                 >
                   Více
                 </Button>

@@ -35,7 +35,8 @@ const mock = [
   },
 ];
 
-const Advantages = (): JSX.Element => {
+const Advantages = ({ data }): JSX.Element => {
+  const { smallTitle, subtitle, title, places } = data;
   return (
     <Box>
       <Box marginBottom={8}>
@@ -48,7 +49,7 @@ const Advantages = (): JSX.Element => {
           color={'secondary'}
           align={'center'}
         >
-          Místa
+          {smallTitle}
         </Typography>
         <Typography
           variant="h4"
@@ -59,7 +60,7 @@ const Advantages = (): JSX.Element => {
             fontWeight: 700,
           }}
         >
-          Objevujte krásná místa v okolí
+          {title}
         </Typography>
         <Typography
           variant="h6"
@@ -67,13 +68,11 @@ const Advantages = (): JSX.Element => {
           data-aos={'fade-up'}
           sx={{ textAlign: { xs: 'left', md: 'center' } }}
         >
-          Prozkoumejte místa v okolí na kole nebo pěšky.
-          <br />
-          Připravili jsme pro Vás přehled míst, které stojí za návštěvu
+          {subtitle}
         </Typography>
       </Box>
       <Grid container spacing={4}>
-        {mock.map((item, i) => (
+        {places.map((item, i) => (
           <Grid
             key={i}
             item
@@ -83,7 +82,7 @@ const Advantages = (): JSX.Element => {
           >
             <ListItemText
               primary={item.title}
-              secondary={item.subtitle}
+              secondary={item.description}
               primaryTypographyProps={{ variant: 'h5', gutterBottom: true }}
               secondaryTypographyProps={{ variant: 'subtitle1' }}
               sx={{
@@ -94,32 +93,34 @@ const Advantages = (): JSX.Element => {
               }}
             />
             <Box sx={{ flexGrow: 1 }} />
-            <Box marginTop={1}>
-              <Button
-                component={'a'}
-                href={item.link}
-                endIcon={
-                  <Box
-                    component={'svg'}
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    width={24}
-                    height={24}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    />
-                  </Box>
-                }
-              >
-                Více
-              </Button>
-            </Box>
+            {item.mapLink && (
+              <Box marginTop={1}>
+                <Button
+                  component={'a'}
+                  href={item.mapLink}
+                  endIcon={
+                    <Box
+                      component={'svg'}
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      width={24}
+                      height={24}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </Box>
+                  }
+                >
+                  Mapa
+                </Button>
+              </Box>
+            )}
           </Grid>
         ))}
       </Grid>

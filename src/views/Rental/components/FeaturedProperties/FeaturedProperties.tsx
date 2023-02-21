@@ -12,7 +12,7 @@ import CardActions from '@mui/material/CardActions';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { ReservationContext } from '../../../../context/ReservationContext';
-
+import RezervationModal from './components/RezervationModal';
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
   return (
@@ -142,7 +142,7 @@ const FeaturedProperties = ({ data }): JSX.Element => {
                   <Slider {...settings}>
                     {room?.images?.map((img, i) => {
                       return (
-                        <Box height={'280px'}>
+                        <Box height={'280px'} key={i}>
                           <GatsbyImage
                             key={i}
                             image={img.gatsbyImageData}
@@ -239,14 +239,7 @@ const FeaturedProperties = ({ data }): JSX.Element => {
                   >
                     Více info
                   </Button>
-                  <Button
-                    size="small"
-                    variant="contained"
-                    color="primary"
-                    fullWidth
-                  >
-                    Rezervovat
-                  </Button>
+                  <RezervationModal title={room.name} price={room.price} />
                 </CardActions>
               </Box>
             </Box>

@@ -72,7 +72,11 @@ export const query = graphql`
       }
       photogallery {
         gatsbyImageData(placeholder: BLURRED, layout: CONSTRAINED, width: 500)
-        description
+        title
+      }
+      reviews {
+        name
+        review
       }
       placesSection {
         smallTitle
@@ -104,6 +108,7 @@ const Rental = (): JSX.Element => {
     equipmentSection,
     roomsSection,
     photogallery,
+    reviews,
     placesSection,
   } = data.contentfulWeb;
   console.log(heroSection);
@@ -123,17 +128,17 @@ const Rental = (): JSX.Element => {
       {/*   <Container sx={{ paddingTop: '0 !important' }}>
         <Articles />
       </Container> */}
-      <Box bgcolor={'alternate.main'}>
+      <Box bgcolor={'alternate.main'} id="rental">
         <Container>
           <FeaturedProperties data={roomsSection} />
         </Container>
       </Box>
       <Container>
-        <Places />
+        <Places data={photogallery} />
       </Container>
       <Box bgcolor={'alternate.main'}>
         <Container>
-          <Reviews />
+          <Reviews data={reviews} />
         </Container>
       </Box>
       {/* <Container>
@@ -141,7 +146,7 @@ const Rental = (): JSX.Element => {
       </Container> */}
 
       <Container>
-        <Advantages />
+        <Advantages data={placesSection} />
       </Container>
 
       {/*  <Container>

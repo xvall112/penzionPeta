@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StaticImage } from 'gatsby-plugin-image';
+import { StaticImage, GatsbyImage } from 'gatsby-plugin-image';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Lightbox from 'react-image-lightbox';
 import { useTheme } from '@mui/material/styles';
@@ -11,7 +11,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 
-const Places = (): JSX.Element => {
+const Places = ({ data }): JSX.Element => {
   const theme = useTheme();
   const [currentImage, setCurrentImage] = useState(0);
   const [viewerIsOpen, setViewerIsOpen] = useState(false);
@@ -141,66 +141,20 @@ const Places = (): JSX.Element => {
           </Box>
         </Box>
       </Box> */}
-      <Box
-        sx={{
-          borderRadius: '10px',
-          WebkitBorderRadius: '10px',
-          overflow: 'hidden',
-          '& img': {
-            borderRadius: '10px',
-            WebkitBorderRadius: '10px',
-          },
-        }}
-      >
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={6}>
-            <StaticImage
-              layout={'fullWidth'}
-              height={500}
-              src="../../../../images/pool.jpg"
-              alt="..."
-              style={{ borderRadius: '10px' }}
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <StaticImage
-              layout={'fullWidth'}
-              height={500}
-              src="../../../../images/house.jpg"
-              alt="..."
-              style={{ borderRadius: '10px' }}
-            />
-          </Grid>
+      <ImageList variant="masonry" cols={isMd ? 3 : 1} gap={8}>
+        {data.map((image, i) => {
+          return (
+            <ImageListItem key={i}>
+              <GatsbyImage
+                image={image.gatsbyImageData}
+                alt={image.title}
+                imgStyle={{ borderRadius: '10px', WebkitBorderRadius: '10px' }}
+              />
+            </ImageListItem>
+          );
+        })}
+      </ImageList>
 
-          <Grid item xs={12} md={6}>
-            <StaticImage
-              layout={'fullWidth'}
-              height={500}
-              src="../../../../images/titleImage.jpg"
-              alt="..."
-              style={{ borderRadius: '10px' }}
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <StaticImage
-              layout={'fullWidth'}
-              height={500}
-              src="../../../../images/sunset.jpg"
-              alt="..."
-              style={{ borderRadius: '10px' }}
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <StaticImage
-              layout={'fullWidth'}
-              height={500}
-              src="../../../../images/seroundings.jpg"
-              alt="..."
-              style={{ borderRadius: '10px' }}
-            />
-          </Grid>
-        </Grid>
-      </Box>
       {/*  {viewerIsOpen && (
         <Lightbox
           mainSrc={photos[currentImage].src}
