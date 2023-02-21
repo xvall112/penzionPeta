@@ -1,16 +1,18 @@
 import React, { useContext } from 'react';
+import { graphql, useStaticQuery } from 'gatsby';
+import ListItemText from '@mui/material/ListItemText';
+import ListItem from '@mui/material/ListItem';
+import scrollTo from 'gatsby-plugin-smoothscroll';
 import Box from '@mui/material/Box';
 import { Link } from 'gatsby';
 import { Button, Typography } from '@mui/material';
 import { alpha, useTheme } from '@mui/material/styles';
+import InstagramIcon from '@mui/icons-material/Instagram';
 
-import MenuIcon from '@mui/icons-material/Menu';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
+import useScrollTrigger from '@mui/material/useScrollTrigger';
 
-import { NavItem } from './components';
-
-import { ReservationContext } from '../../../../context/ReservationContext';
 interface Props {
   // eslint-disable-next-line @typescript-eslint/ban-types
   onSidebarOpen: () => void;
@@ -25,22 +27,30 @@ interface Props {
   colorInvert?: boolean;
 }
 
+export const query = graphql`
+  query {
+    contentfulWeb {
+      organization {
+        email
+        instagram
+        tel
+      }
+    }
+  }
+`;
+
 const Topbar = ({
   onSidebarOpen,
   pages,
   colorInvert = false,
 }: Props): JSX.Element => {
-  const { handleClickOpen } = useContext(ReservationContext);
+  const data = useStaticQuery(query);
+  const { email, instagram, tel } = data.contentfulWeb.organization;
   const theme = useTheme();
-  const { mode } = theme.palette;
-  const {
-    landings: landingPages,
-    secondary: secondaryPages,
-    company: companyPages,
-    account: accountPages,
-    portfolio: portfolioPages,
-    blog: blogPages,
-  } = pages;
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 38,
+  });
 
   return (
     <Box
@@ -69,12 +79,20 @@ const Topbar = ({
           </Typography>
         </Box>
       </Box>
-      <Box sx={{ display: { xs: 'flex', md: 'none' } }} alignItems={'center'}>
-        <Box mr={1}>
+
+      <Box display={'flex'} flexDirection={'row'}>
+        <Box
+          component={ListItem}
+          disableGutters
+          width={'auto'}
+          padding={0}
+          marginRight={{ xs: 1, md: 0 }}
+        >
           <Button
             component={'a'}
-            href="mailto:petradedinova95@gmail.com"
-            aria-label="Menu"
+            href={instagram}
+            target="_blank"
+            aria-label="Instagram"
             variant={'outlined'}
             sx={{
               borderRadius: 2,
@@ -83,46 +101,75 @@ const Topbar = ({
               borderColor: alpha(theme.palette.divider, 0.2),
             }}
           >
-            <EmailIcon />
+            <InstagramIcon />
           </Button>
         </Box>
-        <Button
-          component={'a'}
-          href="tel:725001393"
-          aria-label="Menu"
-          variant={'outlined'}
-          sx={{
-            borderRadius: 2,
-            minWidth: 'auto',
-            padding: 1,
-            borderColor: alpha(theme.palette.divider, 0.2),
-          }}
+        <Box
+          component={ListItem}
+          disableGutters
+          width={'auto'}
+          paddingX={{ xs: 0, md: 2 }}
         >
-          <PhoneIcon />
-        </Button>
-      </Box>
-      <Box
-        sx={{ display: { xs: 'none', md: 'flex' }, textDecoration: 'none' }}
-        alignItems={'center'}
-      >
-        <Box component="a">
-          <Typography variant="h6" fontWeight={700}>
-            Email: petradedinova95@gmail.com
-          </Typography>
+          <Box minWidth={'auto !important'} marginRight={1}>
+            <Button
+              component={'a'}
+              href={`mailto:${email}`}
+              aria-label="Email"
+              variant={'outlined'}
+              sx={{
+                borderRadius: 2,
+                minWidth: 'auto',
+                padding: 1,
+                borderColor: alpha(theme.palette.divider, 0.2),
+              }}
+            >
+              <EmailIcon />
+            </Button>
+          </Box>
+          <Box
+            component={ListItemText}
+            secondary={email}
+            display={{ xs: 'none', md: 'block' }}
+            secondaryTypographyProps={{
+              color: !trigger ? 'common.white' : 'text.secondary',
+            }}
+          />
         </Box>
-        <Box marginLeft={4} component="a">
-          <Typography variant="h6" fontWeight={700}>
-            {' '}
-            Tel: 725001393{' '}
-          </Typography>
+        <Box component={ListItem} disableGutters width={'auto'} padding={0}>
+          <Box minWidth={'auto !important'} marginRight={1}>
+            <Button
+              component={'a'}
+              href={`tel:${tel}`}
+              target="_blank"
+              aria-label="Telefon"
+              variant={'outlined'}
+              sx={{
+                borderRadius: 2,
+                minWidth: 'auto',
+                padding: 1,
+                borderColor: alpha(theme.palette.divider, 0.2),
+              }}
+            >
+              <PhoneIcon />
+            </Button>
+          </Box>
+          <Box
+            component={ListItemText}
+            secondary={tel}
+            display={{ xs: 'none', md: 'block' }}
+            secondaryTypographyProps={{
+              color: !trigger ? 'common.white' : 'text.secondary',
+            }}
+          />
         </Box>
       </Box>
+
       <Box marginLeft={1}>
         <Button
           variant="contained"
           color="primary"
           size="large"
-          onClick={handleClickOpen}
+          onClick={() => scrollTo('#rental')}
         >
           REZERVOVAT
         </Button>

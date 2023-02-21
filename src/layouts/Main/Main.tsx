@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
 import Divider from '@mui/material/Divider';
 import AppBar from '@mui/material/AppBar';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 
 import Container from 'components/Container';
-import { Topbar, Sidebar, Footer, ThemeModeToggler } from './components';
+import { Topbar, Footer } from './components';
 
 import pages from '../navigation';
 
@@ -32,10 +31,6 @@ const Main = ({
 
   const handleSidebarOpen = (): void => {
     setOpenSidebar(true);
-  };
-
-  const handleSidebarClose = (): void => {
-    setOpenSidebar(false);
   };
 
   const open = isMd ? false : openSidebar;
@@ -70,7 +65,7 @@ const Main = ({
         </Container>
       </Box> */}
       <AppBar
-        position={'sticky'}
+        position={'fixed'}
         sx={{
           top: 0,
           backgroundColor: trigger ? theme.palette.background.paper : bgcolor,
@@ -78,11 +73,7 @@ const Main = ({
         elevation={trigger ? 1 : 0}
       >
         <Container paddingY={1}>
-          <Topbar
-            onSidebarOpen={handleSidebarOpen}
-            pages={pages}
-            colorInvert={trigger ? false : colorInvert}
-          />
+          <Topbar pages={pages} colorInvert={trigger ? false : colorInvert} />
         </Container>
       </AppBar>
       {/*  <Sidebar

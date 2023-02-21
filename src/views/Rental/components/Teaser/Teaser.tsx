@@ -1,21 +1,32 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
+import Slider from 'react-slick';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import { StaticImage } from 'gatsby-plugin-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
+import { style } from '@mui/system';
 
-const Teaser = (): JSX.Element => {
+const Teaser = ({ data }): JSX.Element => {
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+  };
 
   return (
     <Box>
@@ -37,31 +48,20 @@ const Teaser = (): JSX.Element => {
               gutterBottom
               color={'secondary'}
             >
-              Penzion
+              {data.smallTitle}
             </Typography>
             <Typography variant={'h4'} gutterBottom sx={{ fontWeight: 700 }}>
-              Domeček{' '}
+              {data.title}{' '}
               <Typography color="primary" variant="inherit" component="span">
-                Jalovčí
+                {data.titleColor}
               </Typography>
             </Typography>
             <Typography variant={'h6'} component={'p'} color={'text.secondary'}>
-              Ubytování se nachází v krásne přírodě Středočeského kraje
-              <br />
-              Celkem 6 lůžek rozděleno do tří pokojů
-              <br />
+              {data.subtitle}
             </Typography>
             <Box mt={2}>
               <Grid container spacing={1}>
-                {[
-                  'Vlastní sociální zařízení',
-                  'Gril',
-                  'Zahrada',
-                  'TV',
-                  'Společenská místnost',
-                  'Terasa s posezením',
-                  'Plně vybavená kuchyň',
-                ].map((item, i) => (
+                {data.equipmentList.map((item, i) => (
                   <Grid item xs={12} sm={6} key={i}>
                     <Box
                       component={ListItem}
@@ -113,22 +113,55 @@ const Teaser = (): JSX.Element => {
         >
           <Box
             sx={{
+              overflow: 'hidden',
               borderRadius: '10px',
               WebkitBorderRadius: '10px',
-              overflow: 'hidden',
-              '& img': {
-                borderRadius: '10px',
-                WebkitBorderRadius: '10px',
+              width: '100%',
+              '& .slick-dots': {
+                bottom: '15px',
+                '& li': { margin: '0px' },
+                '& button:before': {
+                  color: `white !important`,
+                  fontSize: '10px',
+                },
+              },
+              '& .slick-prev': {
+                display: 'block',
+                left: 20,
+                zIndex: 10,
+              },
+              '& .slick-next': {
+                display: 'block',
+                right: 20,
+                zIndex: 10,
+              },
+              '& .slick-prev, & .slick-next': {
+                width: 32,
+                height: 32,
+                '&:before': {
+                  fontSize: 32,
+                  color: 'common.white',
+                },
               },
             }}
           >
-            <StaticImage
-              src="../../../../images/house.jpg"
-              alt="Domecek Jalovci"
-              width={500}
-              height={500}
-              style={{ borderRadius: '10px', WebkitBorderRadius: '10px' }}
-            />
+            <Slider {...settings}>
+              {data?.images?.map((img, i) => {
+                return (
+                  <Box key={i}>
+                    <GatsbyImage
+                      image={img.gatsbyImageData}
+                      alt={img.title}
+                      style={{ width: '100%', height: '100%' }}
+                      imgStyle={{
+                        borderRadius: '10px',
+                        WebkitBorderRadius: '10px',
+                      }}
+                    />
+                  </Box>
+                );
+              })}
+            </Slider>
           </Box>
         </Grid>
       </Grid>

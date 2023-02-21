@@ -11,7 +11,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Container from 'components/Container';
 
-const Hero = (): JSX.Element => {
+const Hero = ({ data }): JSX.Element => {
   const theme = useTheme();
 
   return (
@@ -60,7 +60,7 @@ const Hero = (): JSX.Element => {
               textAlign: 'center',
             }}
           >
-            Domeček Jalovčí
+            {data.title}
           </Typography>
           <Box
             p={3}
@@ -80,8 +80,7 @@ const Hero = (): JSX.Element => {
                 textTransform: 'uppercase',
               }}
             >
-              Ubytování a agroturistika
-              <br />v malé zemědělské usedlosti
+              {data.subtitle}
             </Typography>
           </Box>
           <Box pt={1}>
