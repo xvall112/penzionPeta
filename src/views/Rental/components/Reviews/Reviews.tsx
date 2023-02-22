@@ -127,7 +127,7 @@ const Reviews = ({ data }): JSX.Element => {
               marginLeft: theme.spacing(-7),
             },
             '& .slick-slide > div': {
-              margin: '40px',
+              margin: { xs: '10px', md: '20px' },
             },
           }}
         >
@@ -136,7 +136,7 @@ const Reviews = ({ data }): JSX.Element => {
               <Box
                 key={i}
                 component={Card}
-                boxShadow={4}
+                boxShadow={3}
                 sx={{
                   display: 'flex',
                   flexDirection: { xs: 'column', md: 'row' },
@@ -165,10 +165,15 @@ const Reviews = ({ data }): JSX.Element => {
                       sx={{ padding: 0, marginTop: 2 }}
                     >
                       <ListItemText
-                        sx={{ margin: 0 }}
+                        sx={{
+                          margin: 0,
+                        }}
                         primary={item.name}
                         secondary={
-                          <Box display={'flex'}>
+                          <Box
+                            display={'flex'}
+                            justifyContent={{ xs: 'center', md: 'start' }}
+                          >
                             {[1, 2, 3, 4, 5].map((item) => (
                               <Box
                                 key={item}

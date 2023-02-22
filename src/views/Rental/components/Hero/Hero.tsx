@@ -37,7 +37,7 @@ const Hero = ({ data }): JSX.Element => {
           bottom: 0,
           width: 1,
           height: 1,
-          background: alpha(theme.palette.primary.dark, 0.3),
+          background: alpha(theme.palette.primary.main, 0.3),
           zIndex: 1,
         }}
       />
@@ -65,7 +65,8 @@ const Hero = ({ data }): JSX.Element => {
           <Box
             p={3}
             sx={{
-              background: alpha(theme.palette.secondary.main, 0.5),
+              background: alpha(theme.palette.primary.main, 0.7),
+              /* border: `3px solid ${theme.palette.secondary.main}`, */
               borderRadius: '10px',
             }}
           >

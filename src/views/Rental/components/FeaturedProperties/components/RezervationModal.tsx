@@ -83,7 +83,7 @@ export default function RezervationModal({ title, price }) {
       >
         Rezervovat
       </Button>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>
           <DialogContentText>Cena: {price} Kč/noc</DialogContentText>

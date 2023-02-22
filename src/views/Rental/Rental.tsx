@@ -37,6 +37,10 @@ export const query = graphql`
         subtitle
         title
         hireBikeInfo
+        services {
+          title
+          subtitle
+        }
       }
       equipmentSection {
         titleColor
@@ -47,6 +51,9 @@ export const query = graphql`
         images {
           title
           gatsbyImageData(placeholder: BLURRED, aspectRatio: 1)
+        }
+        suitFor {
+          title
         }
       }
       roomsSection {
@@ -83,6 +90,7 @@ export const query = graphql`
         subtitle
         title
         places {
+          smallTitle
           title
           mapLink
           description

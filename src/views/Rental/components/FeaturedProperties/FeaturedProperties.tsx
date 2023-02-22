@@ -13,6 +13,8 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { ReservationContext } from '../../../../context/ReservationContext';
 import RezervationModal from './components/RezervationModal';
+import InfoModal from './components/InfoModal';
+
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
   return (
@@ -238,15 +240,23 @@ const FeaturedProperties = ({ data }): JSX.Element => {
                   </Box> */}
                 </CardContent>
                 <CardActions>
-                  <Button
-                    size="small"
-                    variant="outlined"
-                    color="primary"
-                    fullWidth
-                  >
-                    Více info
-                  </Button>
-                  <RezervationModal title={room.name} price={room.price} />
+                  <Box width="100%">
+                    <Grid container spacing={1}>
+                      <Grid item xs={6}>
+                        <InfoModal
+                          title={room.name}
+                          list={room.info}
+                          price={room.price}
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <RezervationModal
+                          title={room.name}
+                          price={room.price}
+                        />
+                      </Grid>
+                    </Grid>
+                  </Box>
                 </CardActions>
               </Box>
             </Box>
