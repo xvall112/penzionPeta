@@ -101,10 +101,17 @@ const FeaturedProperties = ({ data }): JSX.Element => {
             <Box display={'block'} width={1} height={1}>
               <Box
                 component={Card}
+                boxShadow={3}
                 width={1}
                 height={1}
                 display={'flex'}
                 flexDirection={'column'}
+                sx={{
+                  transition: 'all .2s ease-in-out',
+                  '&:hover': {
+                    transform: 'translateY(-4px)',
+                  },
+                }}
               >
                 <Box
                   sx={{

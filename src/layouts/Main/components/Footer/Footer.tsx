@@ -128,8 +128,31 @@ const Footer = (): JSX.Element => {
                 <ListItemText primary={'Instagram'} secondary={'Instagram'} />
               </Box>
             </Box>
+            <Box display="flex" flexWrap={'wrap'} alignItems={'center'}>
+              <Box marginTop={1}>
+                <Box>
+                  <h3>Domeček Jalovčí</h3>
+                </Box>
+                <Box>Třtí 21</Box>
+                <Box>Dolní Hbity</Box>
+                <Box>262 63</Box>
+                <Box>
+                  <h5>Petra Dědinová</h5>
+                </Box>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  target="blank"
+                  size="small"
+                  onClick={() => scrollTo('#rental')}
+                >
+                  REZERVOVAT
+                </Button>
+              </Box>
+            </Box>
           </Box>
-          <Box flexGrow={2} width="100%" px={{ sx: 0, md: 4 }}>
+
+          <Box flexGrow={2} width="100%" height="100%" px={{ sx: 0, md: 4 }}>
             <iframe
               width="100%"
               height="100%"
@@ -147,28 +170,6 @@ const Footer = (): JSX.Element => {
                     : 'none',
               }}
             />
-          </Box>
-          <Box display="flex" flexWrap={'wrap'} alignItems={'center'}>
-            <Box marginTop={1}>
-              <Box>
-                <h3>Domeček Jalovčí</h3>
-              </Box>
-              <Box>Třtí 21</Box>
-              <Box>Dolní Hbity</Box>
-              <Box>262 63</Box>
-              <Box>
-                <h5>Petra Dědinová</h5>
-              </Box>
-              <Button
-                variant="outlined"
-                color="primary"
-                target="blank"
-                size="small"
-                onClick={() => scrollTo('#rental')}
-              >
-                REZERVOVAT
-              </Button>
-            </Box>
           </Box>
         </Box>
       </Grid>
