@@ -30,35 +30,6 @@ const Places = ({ data }): JSX.Element => {
     defaultMatches: true,
   });
 
-  const photos = [
-    {
-      src: '../../../../images/pool.jpg',
-      source: '../../../../images/pool.jpg',
-      rows: 1,
-      cols: 2,
-    },
-    {
-      src: '../../../../images/pool.jpg',
-      source: '../../../../images/pool.jpg',
-      rows: 1,
-      cols: 1,
-    },
-    {
-      src: '../../../../images/pool.jpg',
-      source: '../../../../images/pool.jpg',
-      rows: 1,
-      cols: 1,
-    },
-    {
-      src: '../../../../images/pool.jpg',
-      source: '../../../../images/pool.jpg',
-      rows: 1,
-      cols: 2,
-    },
-  ];
-
-  const photosToShow = isMd ? photos : photos.slice(0, photos.length - 1);
-
   return (
     <Box>
       {/* <Box marginBottom={4}>
@@ -141,10 +112,14 @@ const Places = ({ data }): JSX.Element => {
           </Box>
         </Box>
       </Box> */}
-      <ImageList variant="masonry" cols={isMd ? 3 : 1} gap={8}>
+      <ImageList variant="masonry" cols={isMd ? 3 : 2} gap={8}>
         {data.map((image, i) => {
           return (
-            <ImageListItem key={i}>
+            <ImageListItem
+              key={i}
+              sx={{ '&:hover': { cursor: 'pointer' } }}
+              onClick={() => openLightbox(i)}
+            >
               <GatsbyImage
                 image={image.gatsbyImageData}
                 alt={image.title}
@@ -155,23 +130,21 @@ const Places = ({ data }): JSX.Element => {
         })}
       </ImageList>
 
-      {/*  {viewerIsOpen && (
+      {viewerIsOpen && (
         <Lightbox
-          mainSrc={photos[currentImage].src}
-          nextSrc={photos[(currentImage + 1) % photos.length].src}
-          prevSrc={
-            photos[(currentImage + photos.length - 1) % photos.length].src
-          }
+          mainSrc={data[currentImage].url}
+          nextSrc={data[(currentImage + 1) % data.length].url}
+          prevSrc={data[(currentImage + data.length - 1) % data.length].url}
           onCloseRequest={() => closeLightbox()}
           onMovePrevRequest={() =>
-            setCurrentImage((currentImage + photos.length - 1) % photos.length)
+            setCurrentImage((currentImage + data.length - 1) % data.length)
           }
           onMoveNextRequest={() =>
-            setCurrentImage((currentImage + 1) % photos.length)
+            setCurrentImage((currentImage + 1) % data.length)
           }
           reactModalStyle={{ overlay: { zIndex: 1500 } }}
         />
-      )} */}
+      )}
     </Box>
   );
 };

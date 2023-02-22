@@ -17,7 +17,7 @@ const Hero = ({ data }): JSX.Element => {
   return (
     <Box
       minHeight={300}
-      height={'auto'}
+      height={'100vh'}
       position={'relative'}
       sx={{
         backgroundColor: theme.palette.alternate.main,
@@ -44,7 +44,7 @@ const Hero = ({ data }): JSX.Element => {
       <Container position={'relative'} zIndex={2}>
         <Box
           sx={{
-            height: '70vh',
+            height: '90vh',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',

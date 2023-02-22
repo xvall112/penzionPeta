@@ -1,7 +1,8 @@
-import * as React from 'react';
-import { useFormik } from 'formik';
-import * as yup from 'yup';
-import DatePicker from 'react-datepicker';
+import React, { useState } from 'react';
+import { StaticImage, GatsbyImage } from 'gatsby-plugin-image';
+import Lightbox from 'react-image-lightbox';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import Dialog from '@mui/material/Dialog';
@@ -14,9 +15,26 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
-export default function InfoModal({ title, list, price }) {
+export default function InfoModal({ title, list, price, images }) {
+  const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [currentImage, setCurrentImage] = useState(0);
+  const [viewerIsOpen, setViewerIsOpen] = useState(false);
+  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+    defaultMatches: true,
+  });
+
+  const openLightbox = (index: number): void => {
+    setCurrentImage(index);
+    setViewerIsOpen(true);
+  };
+
+  const closeLightbox = (): void => {
+    setCurrentImage(0);
+    setViewerIsOpen(false);
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -25,7 +43,7 @@ export default function InfoModal({ title, list, price }) {
   const handleClose = () => {
     setOpen(false);
   };
-  const theme = useTheme();
+
   return (
     <div>
       <Button
@@ -37,8 +55,30 @@ export default function InfoModal({ title, list, price }) {
         Více info
       </Button>
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
-        <DialogTitle>{title}</DialogTitle>
+        <DialogTitle>
+          <Typography variant="h4">{title}</Typography>
+        </DialogTitle>
         <DialogContent>
+          <ImageList variant="masonry" cols={isMd ? 3 : 2} gap={8}>
+            {images.map((image, i) => {
+              return (
+                <ImageListItem
+                  key={i}
+                  sx={{ '&:hover': { cursor: 'pointer' } }}
+                  onClick={() => openLightbox(i)}
+                >
+                  <GatsbyImage
+                    image={image.gatsbyImageData}
+                    alt={image.title}
+                    imgStyle={{
+                      borderRadius: '10px',
+                      WebkitBorderRadius: '10px',
+                    }}
+                  />
+                </ImageListItem>
+              );
+            })}
+          </ImageList>
           <DialogContentText>Cena: {price} Kč/noc</DialogContentText>
           <Box mt={3}>
             <Grid container spacing={2}>
@@ -53,7 +93,7 @@ export default function InfoModal({ title, list, price }) {
                     }}
                   >
                     <CardContent sx={{ paddingBottom: '16px !important' }}>
-                      <Typography fontWeight={700}>{item}</Typography>
+                      <Typography fontWeight={500}>{item}</Typography>
                     </CardContent>
                   </Box>
                 </Grid>
@@ -65,6 +105,23 @@ export default function InfoModal({ title, list, price }) {
           <Button onClick={handleClose}>Zavřít</Button>
         </DialogActions>
       </Dialog>
+      {viewerIsOpen && (
+        <Lightbox
+          mainSrc={images[currentImage].url}
+          nextSrc={images[(currentImage + 1) % images.length].url}
+          prevSrc={
+            images[(currentImage + images.length - 1) % images.length].url
+          }
+          onCloseRequest={() => closeLightbox()}
+          onMovePrevRequest={() =>
+            setCurrentImage((currentImage + images.length - 1) % images.length)
+          }
+          onMoveNextRequest={() =>
+            setCurrentImage((currentImage + 1) % images.length)
+          }
+          reactModalStyle={{ overlay: { zIndex: 1500 } }}
+        />
+      )}
     </div>
   );
 }

@@ -40,6 +40,7 @@ const Teaser = ({ data }): JSX.Element => {
           xs={12}
           md={6}
           data-aos={isMd ? 'fade-right' : 'fade-up'}
+          sx={{ order: { xs: 2, md: 1 } }}
         >
           <Box>
             <Typography
@@ -63,6 +64,18 @@ const Teaser = ({ data }): JSX.Element => {
             </Typography>
             <Box mt={2}>
               <Grid container spacing={1}>
+                <Grid item xs={12}>
+                  <Typography
+                    variant="h6"
+                    align={'left'}
+                    data-aos={'fade-up'}
+                    sx={{
+                      fontWeight: 700,
+                    }}
+                  >
+                    Vybavení
+                  </Typography>
+                </Grid>
                 {data.equipmentList.map((item, i) => (
                   <Grid item xs={12} sm={6} key={i}>
                     <Box
@@ -123,6 +136,7 @@ const Teaser = ({ data }): JSX.Element => {
           alignItems="center"
           xs={12}
           md={6}
+          sx={{ order: { xs: 1, md: 2 } }}
         >
           <Box
             sx={{
@@ -178,13 +192,17 @@ const Teaser = ({ data }): JSX.Element => {
           </Box>
         </Grid>
 
-        <Grid item container spacing={{ xs: 1, md: 4 }}>
+        <Grid
+          item
+          container
+          spacing={{ xs: 1, md: 4 }}
+          sx={{ order: { xs: 3, md: 3 } }}
+        >
           <Grid item xs={12}>
             <Typography
-              variant="h4"
+              variant="h6"
               align={'left'}
               data-aos={'fade-up'}
-              gutterBottom
               sx={{
                 fontWeight: 700,
               }}
@@ -208,15 +226,15 @@ const Teaser = ({ data }): JSX.Element => {
               >
                 <Box
                   component={Card}
-                  boxShadow={3}
-                  padding={4}
+                  variant={'outlined'}
+                  bgcolor={'transparent'}
+                  padding={2}
                   width={1}
                   height={1}
                   data-aos={'fade-up'}
                   data-aos-delay={i * 100}
                   data-aos-offset={100}
                   data-aos-duration={600}
-                  sx={{ border: `1px solid ${theme.palette.primary.main}` }}
                 >
                   <Box
                     position={'relative'}
@@ -258,7 +276,7 @@ const Teaser = ({ data }): JSX.Element => {
                     </Box>
                   </Box>
                   <Typography
-                    variant={'h6'}
+                    variant={'subtitle1'}
                     align={'center'}
                     sx={{ fontWeight: 700, marginTop: 2 }}
                   >

@@ -247,6 +247,7 @@ const FeaturedProperties = ({ data }): JSX.Element => {
                           title={room.name}
                           list={room.info}
                           price={room.price}
+                          images={room.images}
                         />
                       </Grid>
                       <Grid item xs={6}>

@@ -68,6 +68,7 @@ export const query = graphql`
           name
           price
           images {
+            url
             title
             gatsbyImageData(
               layout: CONSTRAINED
@@ -78,6 +79,7 @@ export const query = graphql`
         }
       }
       photogallery {
+        url
         gatsbyImageData(placeholder: BLURRED, layout: CONSTRAINED, width: 500)
         title
       }
