@@ -1,7 +1,7 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useStaticQuery, graphql } from 'gatsby';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import DatePicker from 'react-datepicker';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -14,6 +14,27 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import dayjs, { Dayjs } from 'dayjs';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { google } from 'googleapis';
+
+export const query = graphql`
+  query {
+    calendar(summary: { eq: "Pokoj 3" }) {
+      childrenCalendarEvent {
+        start {
+          date
+        }
+        end {
+          date
+        }
+      }
+    }
+  }
+`;
 
 const validationSchema = yup.object({
   prijezd: yup
@@ -40,15 +61,17 @@ const validationSchema = yup.object({
 });
 
 export default function RezervationModal({ title, price }) {
-  const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState([null, null]);
-
-  const [dateRange, setDateRange] = React.useState([null, null]);
-  const [startDate, endDate] = dateRange;
-
+  const data = useStaticQuery(query);
+  const theme = useTheme();
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState([null, null]);
+  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
+    defaultMatches: true,
+  });
+  const disabledDate = data.calendar.childrenCalendarEvent.map((event) => {
+    return event.start.date;
+  });
   const initialValues = {
-    startDate,
-    endDate,
     prijezd: '',
     odjezd: '',
     email: '',
@@ -72,7 +95,8 @@ export default function RezervationModal({ title, price }) {
   const handleClose = () => {
     setOpen(false);
   };
-  const theme = useTheme();
+
+  console.log(disabledDate);
   return (
     <div>
       <Button
@@ -83,7 +107,13 @@ export default function RezervationModal({ title, price }) {
       >
         Rezervovat
       </Button>
-      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        fullWidth
+        maxWidth="md"
+        fullScreen={isMd ? false : true}
+      >
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>
           <DialogContentText>Cena: {price} Kč/noc</DialogContentText>
@@ -91,16 +121,24 @@ export default function RezervationModal({ title, price }) {
             <form onSubmit={formik.handleSubmit}>
               <Grid container spacing={4}>
                 <Grid item xs={12}>
-                  <DatePicker
-                    minDate={new Date()}
-                    selectsRange={true}
-                    startDate={startDate}
-                    endDate={endDate}
-                    onChange={(update) => {
-                      setDateRange(update);
-                    }}
-                    isClearable={true}
-                  />
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                      shouldDisableDate={(day) => {
+                        const currentDate = day.toISOString().split('T')[0];
+                        return disabledDate.find(
+                          (date) => date === currentDate,
+                        );
+                      }}
+                      loading={false}
+                      disablePast
+                      label="Basic example"
+                      value={value}
+                      onChange={(newValue) => {
+                        setValue(newValue);
+                      }}
+                      renderInput={(params) => <TextField {...params} />}
+                    />
+                  </LocalizationProvider>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField

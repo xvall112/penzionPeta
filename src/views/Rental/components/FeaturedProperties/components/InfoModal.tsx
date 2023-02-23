@@ -11,9 +11,10 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import CardContent from '@mui/material/CardContent';
+import Grid from '@mui/material/Grid';
+import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
@@ -54,9 +55,17 @@ export default function InfoModal({ title, list, price, images }) {
       >
         Více info
       </Button>
-      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        fullWidth
+        maxWidth="md"
+        fullScreen={isMd ? false : true}
+      >
         <DialogTitle>
-          <Typography variant="h4">{title}</Typography>
+          <Box display="flex" flexDirection={'row'}>
+            <Typography variant="h4">{title}</Typography>
+          </Box>
         </DialogTitle>
         <DialogContent>
           <ImageList variant="masonry" cols={isMd ? 3 : 2} gap={8}>
@@ -82,6 +91,9 @@ export default function InfoModal({ title, list, price, images }) {
           <DialogContentText>Cena: {price} Kč/noc</DialogContentText>
           <Box mt={3}>
             <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Divider />
+              </Grid>
               {list.map((item, i) => (
                 <Grid item xs={12} key={i}>
                   <Box
