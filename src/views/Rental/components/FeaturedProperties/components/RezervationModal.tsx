@@ -3,6 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Button from '@mui/material/Button';
+import Badge from '@mui/material/Badge';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -16,10 +17,14 @@ import Divider from '@mui/material/Divider';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import dayjs, { Dayjs } from 'dayjs';
+import isBetween from 'dayjs/plugin/isBetween';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { LocalizationProvider } from '@mui/x-date-pickers';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import { PickersDay, PickersDayProps } from '@mui/x-date-pickers/PickersDay';
 import { google } from 'googleapis';
+import 'dayjs/locale/cs';
 
 export const query = graphql`
   query {
@@ -36,51 +41,87 @@ export const query = graphql`
   }
 `;
 
-const validationSchema = yup.object({
-  prijezd: yup
-    .string()
-    .trim()
-    .min(2, 'Please enter a valid name')
-    .max(50, 'Please enter a valid name')
-    .required('Please specify your first name'),
-  odjezd: yup
-    .string()
-    .trim()
-    .min(2, 'Please enter a valid name')
-    .max(50, 'Please enter a valid name')
-    .required('Please specify your last name'),
-  email: yup
-    .string()
-    .trim()
-    .email('Please enter a valid email address')
-    .required('Email is required.'),
-  message: yup
-    .string()
-    .trim()
-    .required('Please specify your message'),
-});
-
 export default function RezervationModal({ title, price }) {
+  dayjs.extend(isBetween);
   const data = useStaticQuery(query);
+  const disabledDates = [];
+
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState([null, null]);
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
-  const disabledDate = data.calendar.childrenCalendarEvent.map((event) => {
-    return event.start.date;
+
+  const getRangeDates = (startDate, endDate) => {
+    const currentDate = new Date(startDate);
+    while (currentDate <= endDate) {
+      const date = new Date(currentDate);
+      disabledDates.push(date.toISOString().split('T')[0]);
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+  };
+
+  const checkDates = (start, end) => {
+    const currentDate = new Date(start);
+    const endDate = new Date(end);
+
+    while (currentDate <= endDate) {
+      const dates = new Date(currentDate.toISOString().split('T')[0]);
+      return disabledDates.find((date) => date === dates) ? true : false;
+    }
+  };
+
+  data.calendar.childrenCalendarEvent.map((event) => {
+    const startDate = new Date(event.start.date);
+    const endDate = new Date(event.end.date);
+    getRangeDates(startDate, endDate);
   });
+
   const initialValues = {
-    prijezd: '',
-    odjezd: '',
+    prijezd: dayjs(),
+    odjezd: null,
+    name: '',
     email: '',
     message: '',
   };
 
   const onSubmit = (values) => {
-    return values;
+    alert(JSON.stringify(values, null, 2));
   };
+
+  const validationSchema = yup.object({
+    prijezd: yup
+      .date()
+      .default(() => new Date())
+      .min(
+        dayjs().add(-1, 'day'),
+        ({ min }) =>
+          `Datum musí být více než ${dayjs(min).format('DD.MM.YYYY')}`,
+      )
+      .typeError('Špatný formát data, DD.MM.YYYY')
+      .required('Zadejte datum příjezdu'),
+    odjezd: yup
+      .date()
+      .default(() => new Date())
+      .min(
+        dayjs(),
+        ({ min }) =>
+          `Datum musí být více než ${dayjs(min).format('DD.MM.YYYY')}`,
+      )
+      .typeError('Špatný formát data, DD.MM.YYYY')
+      .required('Zadejte datum příjezdu'),
+    email: yup
+      .string()
+      .trim()
+      .email('Špatný email')
+      .required('Vyplňte email'),
+    name: yup
+      .string()
+      .trim()
+      .required('Vyplňte jméno'),
+    message: yup.string().trim(),
+  });
 
   const formik = useFormik({
     initialValues,
@@ -96,7 +137,6 @@ export default function RezervationModal({ title, price }) {
     setOpen(false);
   };
 
-  console.log(disabledDate);
   return (
     <div>
       <Button
@@ -120,65 +160,138 @@ export default function RezervationModal({ title, price }) {
           <Box mt={3}>
             <form onSubmit={formik.handleSubmit}>
               <Grid container spacing={4}>
-                <Grid item xs={12}>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
+                <Grid
+                  item
+                  xs={6}
+                  sx={{
+                    '& .Mui-disabled': { textDecoration: 'line-through' },
+                  }}
+                >
+                  <LocalizationProvider
+                    dateAdapter={AdapterDayjs}
+                    adapterLocale="cs"
+                  >
+                    <DesktopDatePicker
+                      disableHighlightToday
+                      disableMaskedInput={true}
                       shouldDisableDate={(day) => {
                         const currentDate = day.toISOString().split('T')[0];
-                        return disabledDate.find(
+                        return disabledDates.find(
                           (date) => date === currentDate,
                         );
                       }}
                       loading={false}
                       disablePast
-                      label="Basic example"
-                      value={value}
+                      label="Příjezd"
+                      value={formik.values.prijezd}
                       onChange={(newValue) => {
-                        setValue(newValue);
+                        formik.setFieldValue('prijezd', newValue, true);
+                        if (
+                          dayjs(newValue).isAfter(dayjs(formik.values.odjezd))
+                        ) {
+                          formik.setFieldValue(
+                            'odjezd',
+                            null,
+                            /* dayjs(newValue).add(+3, 'day') */
+                          );
+                        }
                       }}
-                      renderInput={(params) => <TextField {...params} />}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          type="date"
+                          fullWidth
+                          name="prijezd"
+                          error={
+                            formik.touched.prijezd &&
+                            Boolean(formik.errors.prijezd)
+                          }
+                          helperText={
+                            formik.touched.prijezd && formik.errors.prijezd
+                          }
+                        />
+                      )}
+                      renderDay={(day, _value, DayComponentProps) => {
+                        const isSelected =
+                          dayjs(day).isSame(formik.values.prijezd, 'day') ||
+                          dayjs(day).isSame(formik.values.odjezd, 'day') ||
+                          dayjs(day).isBetween(
+                            dayjs(formik.values.prijezd),
+                            dayjs(formik.values.odjezd),
+                            'day',
+                          );
+                        return (
+                          <PickersDay
+                            {...DayComponentProps}
+                            selected={isSelected ? true : false}
+                          />
+                        );
+                      }}
                     />
                   </LocalizationProvider>
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    sx={{ height: 54 }}
-                    label="Příjezd"
-                    variant="outlined"
-                    color="primary"
-                    size="medium"
-                    name="prijezd"
-                    fullWidth
-                    value={formik.values.prijezd}
-                    onChange={formik.handleChange}
-                    error={
-                      formik.touched.prijezd && Boolean(formik.errors.prijezd)
-                    }
-                    helperText={formik.touched.prijezd && formik.errors.prijezd}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    sx={{ height: 54 }}
-                    label="Odjezd"
-                    variant="outlined"
-                    color="primary"
-                    size="medium"
-                    name="odjezd"
-                    fullWidth
-                    value={formik.values.odjezd}
-                    onChange={formik.handleChange}
-                    error={
-                      formik.touched.odjezd && Boolean(formik.errors.odjezd)
-                    }
-                    helperText={formik.touched.odjezd && formik.errors.odjezd}
-                  />
+                <Grid item xs={6}>
+                  <LocalizationProvider
+                    dateAdapter={AdapterDayjs}
+                    adapterLocale="cs"
+                  >
+                    <DesktopDatePicker
+                      defaultCalendarMonth={dayjs(formik.values.prijezd)}
+                      disableHighlightToday
+                      shouldDisableDate={(day) => {
+                        const currentDate = day.toISOString().split('T')[0];
+                        return disabledDates.find(
+                          (date) => date === currentDate,
+                        );
+                      }}
+                      minDate={dayjs(formik.values.prijezd).add(+1, 'day')}
+                      loading={false}
+                      disablePast
+                      label="Odjezd"
+                      value={formik.values.odjezd}
+                      onChange={(newValue) => {
+                        !checkDates(formik.values.prijezd, newValue) &&
+                          formik.setFieldValue('odjezd', newValue);
+                      }}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          type="date"
+                          fullWidth
+                          name="odjezd"
+                          error={
+                            formik.touched.odjezd &&
+                            Boolean(formik.errors.odjezd)
+                          }
+                          helperText={
+                            formik.touched.odjezd && formik.errors.odjezd
+                          }
+                        />
+                      )}
+                      renderDay={(day, _value, DayComponentProps) => {
+                        const isSelected =
+                          dayjs(day).isSame(formik.values.prijezd, 'day') ||
+                          dayjs(day).isSame(formik.values.odjezd, 'day') ||
+                          dayjs(day).isBetween(
+                            dayjs(formik.values.prijezd),
+                            dayjs(formik.values.odjezd),
+                            'day',
+                          );
+                        return (
+                          <PickersDay
+                            {...DayComponentProps}
+                            selected={isSelected ? true : false}
+                          />
+                        );
+                      }}
+                    />
+                  </LocalizationProvider>
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
                     sx={{ height: 54 }}
                     label="Jméno"
-                    type="email"
+                    type="text"
                     variant="outlined"
                     color="primary"
                     size="medium"

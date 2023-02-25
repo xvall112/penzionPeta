@@ -95,7 +95,7 @@ export default function InfoModal({ title, list, price, images }) {
                 <Divider />
               </Grid>
               {list.map((item, i) => (
-                <Grid item xs={12} key={i}>
+                <Grid item xs={12} md={6} key={i}>
                   <Box
                     component={Card}
                     variant={'outlined'}
