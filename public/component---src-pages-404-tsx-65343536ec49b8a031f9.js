@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkpenzionPeta=self.webpackChunkpenzionPeta||[]).push([[218],{938:function(e,n,t){t.r(n);var u=t(7294);n.default=function(){return u.createElement("h1",null,"Not found")}}}]);
-//# sourceMappingURL=component---src-pages-404-tsx-65343536ec49b8a031f9.js.map

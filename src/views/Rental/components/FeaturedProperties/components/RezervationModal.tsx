@@ -20,7 +20,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { PickersDay, PickersDayProps } from '@mui/x-date-pickers/PickersDay';
 import { google } from 'googleapis';
@@ -41,7 +41,46 @@ export const query = graphql`
   }
 `;
 
+const validationSchema = yup.object({
+  prijezd: yup
+    .date()
+    .default(() => new Date())
+    .min(
+      dayjs().add(-1, 'day'),
+      ({ min }) => `Datum musí být více než ${dayjs(min).format('DD.MM.YYYY')}`,
+    )
+    .typeError('Špatný formát data, DD.MM.YYYY')
+    .required('Zadejte datum příjezdu'),
+  odjezd: yup
+    .date()
+    .default(() => new Date())
+    .min(
+      dayjs(),
+      ({ min }) => `Datum musí být více než ${dayjs(min).format('DD.MM.YYYY')}`,
+    )
+    .typeError('Špatný formát data, DD.MM.YYYY')
+    .required('Zadejte datum příjezdu'),
+  email: yup
+    .string()
+    .trim()
+    .email('Špatný email')
+    .required('Vyplňte email'),
+  name: yup
+    .string()
+    .trim()
+    .required('Vyplňte jméno'),
+  tel: yup
+    .number()
+    .typeError('Vyplňte číslo')
+    .positive('Číslo nesmí být záporné')
+    .integer('Číslo nesmí obsahovat tečku')
+    .required('Vyplňte číslo'),
+  message: yup.string().trim(),
+});
+
 export default function RezervationModal({ title, price }) {
+  const [dateRange, setDateRange] = useState([null, null]);
+  const [startDate, endDate] = dateRange;
   dayjs.extend(isBetween);
   const data = useStaticQuery(query);
   const disabledDates = [];
@@ -82,6 +121,7 @@ export default function RezervationModal({ title, price }) {
     prijezd: dayjs(),
     odjezd: null,
     name: '',
+    tel: null,
     email: '',
     message: '',
   };
@@ -89,39 +129,6 @@ export default function RezervationModal({ title, price }) {
   const onSubmit = (values) => {
     alert(JSON.stringify(values, null, 2));
   };
-
-  const validationSchema = yup.object({
-    prijezd: yup
-      .date()
-      .default(() => new Date())
-      .min(
-        dayjs().add(-1, 'day'),
-        ({ min }) =>
-          `Datum musí být více než ${dayjs(min).format('DD.MM.YYYY')}`,
-      )
-      .typeError('Špatný formát data, DD.MM.YYYY')
-      .required('Zadejte datum příjezdu'),
-    odjezd: yup
-      .date()
-      .default(() => new Date())
-      .min(
-        dayjs(),
-        ({ min }) =>
-          `Datum musí být více než ${dayjs(min).format('DD.MM.YYYY')}`,
-      )
-      .typeError('Špatný formát data, DD.MM.YYYY')
-      .required('Zadejte datum příjezdu'),
-    email: yup
-      .string()
-      .trim()
-      .email('Špatný email')
-      .required('Vyplňte email'),
-    name: yup
-      .string()
-      .trim()
-      .required('Vyplňte jméno'),
-    message: yup.string().trim(),
-  });
 
   const formik = useFormik({
     initialValues,
@@ -172,6 +179,24 @@ export default function RezervationModal({ title, price }) {
                     adapterLocale="cs"
                   >
                     <DesktopDatePicker
+                      onError={(reason, value) => {
+                        switch (reason) {
+                          case 'shouldDisableDate':
+                            // shouldDisableDate returned true, render custom message according to the `shouldDisableDate` logic
+                            formik.setFieldError(
+                              'prijezd',
+                              'shouldDisableDate',
+                            );
+                            console.log('shouldDisableDate');
+                            break;
+
+                          default:
+                            formik.setErrors({
+                              ...formik.errors,
+                              [name]: undefined,
+                            });
+                        }
+                      }}
                       disableHighlightToday
                       disableMaskedInput={true}
                       shouldDisableDate={(day) => {
@@ -301,6 +326,22 @@ export default function RezervationModal({ title, price }) {
                     onChange={formik.handleChange}
                     error={formik.touched.name && Boolean(formik.errors.name)}
                     helperText={formik.touched.name && formik.errors.name}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    sx={{ height: 54 }}
+                    label="Tel"
+                    type="text"
+                    variant="outlined"
+                    color="primary"
+                    size="medium"
+                    name="tel"
+                    fullWidth
+                    value={formik.values.tel}
+                    onChange={formik.handleChange}
+                    error={formik.touched.tel && Boolean(formik.errors.tel)}
+                    helperText={formik.touched.tel && formik.errors.tel}
                   />
                 </Grid>
                 <Grid item xs={12}>

@@ -2,6 +2,7 @@
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 });
+
 module.exports = {
   siteMetadata: {
     title: 'Domeček Jalovčí',
@@ -26,7 +27,7 @@ module.exports = {
         ],
         // options to retrieve the next 10 upcoming events
         timeMin: new Date().toISOString(),
-        maxResults: 10,
+
         singleEvents: true,
         orderBy: 'startTime',
       },
