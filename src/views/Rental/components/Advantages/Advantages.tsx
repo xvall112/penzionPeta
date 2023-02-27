@@ -1,6 +1,6 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import Button from '@mui/material/Button';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
@@ -115,6 +115,12 @@ const Advantages = ({ data }): JSX.Element => {
         <Slider {...sliderOpts}>
           {places.map((item, i) => (
             <Box key={i} sx={{ display: 'flex', flexDirection: 'column' }}>
+              <GatsbyImage
+                image={item.images.gatsbyImageData}
+                alt={item.images.title}
+                imgStyle={{ borderRadius: '10px', WebkitBorderRadius: '10px' }}
+                style={{ height: '200px', marginBottom: '10px' }}
+              />
               <Typography
                 sx={{
                   textTransform: 'uppercase',

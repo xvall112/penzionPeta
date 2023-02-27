@@ -40,6 +40,12 @@ export const query = graphql`
         services {
           title
           subtitle
+          icon {
+            icon
+          }
+          ic {
+            ic
+          }
         }
       }
       equipmentSection {
@@ -97,6 +103,7 @@ export const query = graphql`
           mapLink
           description
           images {
+            title
             gatsbyImageData(
               layout: CONSTRAINED
               placeholder: BLURRED
