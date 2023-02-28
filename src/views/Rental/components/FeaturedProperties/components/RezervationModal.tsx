@@ -18,9 +18,11 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import dayjs, { Dayjs } from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers';
-
+import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { PickersDay, PickersDayProps } from '@mui/x-date-pickers/PickersDay';
 import { google } from 'googleapis';
@@ -28,7 +30,22 @@ import 'dayjs/locale/cs';
 
 export const query = graphql`
   query {
-    calendar(summary: { eq: "Pokoj 3" }) {
+    allCalendar: allCalendar {
+      nodes {
+        id
+        children {
+          ... on CalendarEvent {
+            end {
+              date
+            }
+            start {
+              date
+            }
+          }
+        }
+      }
+    }
+    calendar: calendar(summary: { eq: "Pokoj 3" }) {
       childrenCalendarEvent {
         start {
           date
@@ -78,47 +95,49 @@ const validationSchema = yup.object({
   message: yup.string().trim(),
 });
 
-export default function RezervationModal({ title, price }) {
+export default function RezervationModal({ title, price, calendarId }) {
+  dayjs.extend(isBetween);
+  dayjs.extend(isSameOrAfter);
+  dayjs.extend(isSameOrBefore);
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
-  dayjs.extend(isBetween);
-  const data = useStaticQuery(query);
-  const disabledDates = [];
-
-  const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState([null, null]);
+  const disabledDates = [];
+
+  const data = useStaticQuery(query);
+
+  const filtredCalendars = data.allCalendar.nodes.filter((item) =>
+    calendarId.includes(item.id),
+  );
+
+  const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
 
-  const getRangeDates = (startDate, endDate) => {
+  const getRangeDates = (startDate, endDat) => {
     const currentDate = new Date(startDate);
-    while (currentDate <= endDate) {
+    const endDate = new Date(endDat);
+    endDate.setDate(endDate.getDate() - 2);
+
+    while (currentDate < endDate) {
       const date = new Date(currentDate);
       disabledDates.push(date.toISOString().split('T')[0]);
       currentDate.setDate(currentDate.getDate() + 1);
     }
   };
 
-  const checkDates = (start, end) => {
-    const currentDate = new Date(start);
-    const endDate = new Date(end);
-
-    while (currentDate <= endDate) {
-      const dates = new Date(currentDate.toISOString().split('T')[0]);
-      return disabledDates.find((date) => date === dates) ? true : false;
-    }
-  };
-
-  data.calendar.childrenCalendarEvent.map((event) => {
-    const startDate = new Date(event.start.date);
-    const endDate = new Date(event.end.date);
-    getRangeDates(startDate, endDate);
+  filtredCalendars.map((calendar) => {
+    calendar.children.map((event) => {
+      const startDate = new Date(event.start.date);
+      const endDate = new Date(event.end.date);
+      getRangeDates(startDate, endDate);
+    });
   });
 
   const initialValues = {
-    prijezd: dayjs(),
+    prijezd: null,
     odjezd: null,
     name: '',
     tel: null,
@@ -127,7 +146,17 @@ export default function RezervationModal({ title, price }) {
   };
 
   const onSubmit = (values) => {
-    alert(JSON.stringify(values, null, 2));
+    alert(
+      JSON.stringify(
+        {
+          ...values,
+          prijezd: dayjs(values.prijezd).format('DD.MM.YYYY'),
+          odjezd: dayjs(values.odjezd).format('DD.MM.YYYY'),
+        },
+        null,
+        2,
+      ),
+    );
   };
 
   const formik = useFormik({
@@ -142,6 +171,18 @@ export default function RezervationModal({ title, price }) {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const checkDates = (start, end) => {
+    const currentDate = new Date(start);
+    const endDate = new Date(end);
+    while (currentDate <= endDate) {
+      const date = new Date(currentDate);
+      const dates = date.toISOString().split('T')[0];
+      disabledDates.includes(dates) === true &&
+        formik.setFieldError('odjezd', 'nepovolena hodnota');
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
   };
 
   return (
@@ -167,36 +208,64 @@ export default function RezervationModal({ title, price }) {
           <Box mt={3}>
             <form onSubmit={formik.handleSubmit}>
               <Grid container spacing={4}>
+                <Grid xs={12}>
+                  <Typography align="center">Kalendář obsazenosti</Typography>
+                </Grid>
                 <Grid
                   item
-                  xs={6}
+                  xs={12}
                   sx={{
-                    '& .Mui-disabled': { textDecoration: 'line-through' },
+                    '& .Mui-disabled': {
+                      textDecoration: 'line-through !important',
+                      backgroundColor: 'red !important',
+                      color: 'white !important',
+                    },
                   }}
                 >
                   <LocalizationProvider
                     dateAdapter={AdapterDayjs}
                     adapterLocale="cs"
                   >
-                    <DesktopDatePicker
-                      onError={(reason, value) => {
-                        switch (reason) {
-                          case 'shouldDisableDate':
-                            // shouldDisableDate returned true, render custom message according to the `shouldDisableDate` logic
-                            formik.setFieldError(
-                              'prijezd',
-                              'shouldDisableDate',
-                            );
-                            console.log('shouldDisableDate');
-                            break;
-
-                          default:
-                            formik.setErrors({
-                              ...formik.errors,
-                              [name]: undefined,
-                            });
-                        }
+                    <StaticDatePicker
+                      displayStaticWrapperAs={'desktop'}
+                      readOnly
+                      disableHighlightToday
+                      disableMaskedInput={true}
+                      shouldDisableDate={(day) => {
+                        const currentDate = day.toISOString().split('T')[0];
+                        return disabledDates.find(
+                          (date) => date === currentDate,
+                        );
                       }}
+                      loading={false}
+                      disablePast
+                      renderInput={(params) => <TextField {...params} />}
+                      renderDay={(day, _value, DayComponentProps) => {
+                        const isSelected =
+                          dayjs(day).isSame(formik.values.prijezd, 'day') ||
+                          dayjs(day).isSame(formik.values.odjezd, 'day') ||
+                          dayjs(day).isBetween(
+                            dayjs(formik.values.prijezd),
+                            dayjs(formik.values.odjezd),
+                            'day',
+                          );
+                        return (
+                          <PickersDay
+                            {...DayComponentProps}
+                            selected={isSelected ? true : false}
+                          />
+                        );
+                      }}
+                    />
+                  </LocalizationProvider>
+                </Grid>
+
+                <Grid item xs={6}>
+                  <LocalizationProvider
+                    dateAdapter={AdapterDayjs}
+                    adapterLocale="cs"
+                  >
+                    <DesktopDatePicker
                       disableHighlightToday
                       disableMaskedInput={true}
                       shouldDisableDate={(day) => {
@@ -210,9 +279,11 @@ export default function RezervationModal({ title, price }) {
                       label="Příjezd"
                       value={formik.values.prijezd}
                       onChange={(newValue) => {
-                        formik.setFieldValue('prijezd', newValue, true);
+                        formik.setFieldValue('prijezd', dayjs(newValue), true);
                         if (
-                          dayjs(newValue).isAfter(dayjs(formik.values.odjezd))
+                          dayjs(newValue).isSameOrAfter(
+                            dayjs(formik.values.odjezd, 'day'),
+                          )
                         ) {
                           formik.setFieldValue(
                             'odjezd',
@@ -275,8 +346,18 @@ export default function RezervationModal({ title, price }) {
                       label="Odjezd"
                       value={formik.values.odjezd}
                       onChange={(newValue) => {
-                        !checkDates(formik.values.prijezd, newValue) &&
-                          formik.setFieldValue('odjezd', newValue);
+                        formik.setFieldValue('odjezd', dayjs(newValue), true);
+                        if (
+                          dayjs(newValue).isSameOrBefore(
+                            dayjs(formik.values.prijezd, 'day'),
+                          )
+                        ) {
+                          formik.setFieldValue(
+                            'prijezd',
+                            null,
+                            /* dayjs(newValue).add(+3, 'day') */
+                          );
+                        }
                       }}
                       renderInput={(params) => (
                         <TextField
@@ -401,17 +482,17 @@ export default function RezervationModal({ title, price }) {
                 <Grid item container justifyContent={'center'} xs={12}>
                   <Box>
                     <Typography component="p" variant="body2" align="left">
-                      By clicking on "submit" you agree to our{' '}
+                      Odesláním formuláře souhlasíte se{' '}
                       <Box
                         component="a"
                         href=""
                         color={theme.palette.text.primary}
                         fontWeight={'700'}
                       >
-                        Privacy Policy
+                        Zpracováním osobních údajů
                       </Box>
                       ,{' '}
-                      <Box
+                      {/*  <Box
                         component="a"
                         href=""
                         color={theme.palette.text.primary}
@@ -427,7 +508,7 @@ export default function RezervationModal({ title, price }) {
                         fontWeight={'700'}
                       >
                         Cookie Policy
-                      </Box>
+                      </Box> */}
                       .
                     </Typography>
                   </Box>

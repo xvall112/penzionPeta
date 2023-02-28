@@ -60,6 +60,9 @@ export const query = graphql`
         }
         suitFor {
           title
+          icon {
+            icon
+          }
         }
       }
       roomsSection {
@@ -67,9 +70,9 @@ export const query = graphql`
         subtitle
         title
         rooms {
-          calendarLink
           describe
           id
+          calendarId
           info
           name
           price
@@ -102,6 +105,7 @@ export const query = graphql`
           title
           mapLink
           description
+          more
           images {
             title
             gatsbyImageData(

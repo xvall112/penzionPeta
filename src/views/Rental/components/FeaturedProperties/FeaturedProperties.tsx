@@ -252,6 +252,7 @@ const FeaturedProperties = ({ data }): JSX.Element => {
                       </Grid>
                       <Grid item xs={6}>
                         <RezervationModal
+                          calendarId={room.calendarId}
                           title={room.name}
                           price={room.price}
                         />
