@@ -44,7 +44,7 @@ const Hero = ({ data }): JSX.Element => {
       <Container position={'relative'} zIndex={2}>
         <Box
           sx={{
-            height: '90vh',
+            height: '100vh',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
