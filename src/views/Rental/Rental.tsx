@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import Box from '@mui/material/Box';
 import Main from 'layouts/Main';
 import Container from 'components/Container';
-import KontaktDialog from '../../components/KontaktDialog';
+
 import {
   Advantages,
   Articles,
@@ -28,6 +28,7 @@ export const query = graphql`
       }
       heroSection {
         backgroundImage {
+          title
           gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
         }
         subtitle
@@ -40,6 +41,12 @@ export const query = graphql`
         services {
           title
           subtitle
+          icon {
+            icon
+          }
+          ic {
+            ic
+          }
         }
       }
       equipmentSection {
@@ -54,6 +61,9 @@ export const query = graphql`
         }
         suitFor {
           title
+          icon {
+            icon
+          }
         }
       }
       roomsSection {
@@ -61,9 +71,9 @@ export const query = graphql`
         subtitle
         title
         rooms {
-          calendarLink
           describe
           id
+          calendarId
           info
           name
           price
@@ -96,7 +106,9 @@ export const query = graphql`
           title
           mapLink
           description
+          more
           images {
+            title
             gatsbyImageData(
               layout: CONSTRAINED
               placeholder: BLURRED
@@ -125,7 +137,6 @@ const Rental = (): JSX.Element => {
 
   return (
     <Main colorInvert={true}>
-      <KontaktDialog />
       <Hero data={heroSection} />
       <Box bgcolor={'alternate.main'}>
         <Container>

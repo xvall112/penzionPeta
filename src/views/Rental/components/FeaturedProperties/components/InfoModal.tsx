@@ -17,6 +17,8 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function InfoModal({ title, list, price, images }) {
   const theme = useTheme();
@@ -63,8 +65,15 @@ export default function InfoModal({ title, list, price, images }) {
         fullScreen={isMd ? false : true}
       >
         <DialogTitle>
-          <Box display="flex" flexDirection={'row'}>
+          <Box
+            display="flex"
+            flexDirection={'row'}
+            justifyContent={'space-between'}
+          >
             <Typography variant="h4">{title}</Typography>
+            <IconButton onClick={handleClose}>
+              <CloseIcon />
+            </IconButton>
           </Box>
         </DialogTitle>
         <DialogContent>

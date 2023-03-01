@@ -1,6 +1,6 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import Button from '@mui/material/Button';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
@@ -115,6 +115,12 @@ const Advantages = ({ data }): JSX.Element => {
         <Slider {...sliderOpts}>
           {places.map((item, i) => (
             <Box key={i} sx={{ display: 'flex', flexDirection: 'column' }}>
+              <GatsbyImage
+                image={item.images.gatsbyImageData}
+                alt={item.images.title}
+                imgStyle={{ borderRadius: '10px', WebkitBorderRadius: '10px' }}
+                style={{ height: '200px', marginBottom: '10px' }}
+              />
               <Typography
                 sx={{
                   textTransform: 'uppercase',
@@ -139,11 +145,12 @@ const Advantages = ({ data }): JSX.Element => {
                 }}
               />
               <Box sx={{ flexGrow: 1 }} />
-              {item.mapLink && (
+              {item.more && (
                 <Box marginTop={1}>
                   <Button
                     component={'a'}
-                    href={item.mapLink}
+                    href={item.more}
+                    target="_blank"
                     endIcon={
                       <Box
                         component={'svg'}
@@ -163,9 +170,36 @@ const Advantages = ({ data }): JSX.Element => {
                       </Box>
                     }
                   >
-                    Mapa
+                    Více
                   </Button>
                 </Box>
+              )}
+              {item.mapLink && (
+                <Button
+                  component={'a'}
+                  href={item.mapLink}
+                  target="_blank"
+                  endIcon={
+                    <Box
+                      component={'svg'}
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      width={24}
+                      height={24}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </Box>
+                  }
+                >
+                  Mapa
+                </Button>
               )}
             </Box>
           ))}

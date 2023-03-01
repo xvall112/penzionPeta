@@ -5,7 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import getTheme from 'theme';
 import AOS from 'aos';
 import { ReservationProvider } from '../context/ReservationContext';
-
+import KontaktDialog from '../components/KontaktDialog';
 export const useDarkMode = (): [string, () => void, boolean] => {
   const [themeMode, setTheme] = useState('light');
   const [mountedComponent, setMountedComponent] = useState(false);
@@ -67,6 +67,7 @@ export default function Page({ children }: Props): JSX.Element {
   return (
     <ReservationProvider>
       <ThemeProvider theme={getTheme(themeMode, themeToggler)}>
+        <KontaktDialog />
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
         <Paper elevation={0}>{children}</Paper>

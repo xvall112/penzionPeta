@@ -1,17 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import Slider from 'react-slick';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import { ReservationContext } from '../../../../context/ReservationContext';
 import RezervationModal from './components/RezervationModal';
 import InfoModal from './components/InfoModal';
 
@@ -42,7 +39,7 @@ const FeaturedProperties = ({ data }): JSX.Element => {
   const isMd = useMediaQuery(theme.breakpoints.up('md'), {
     defaultMatches: true,
   });
-  const { handleClickOpen } = useContext(ReservationContext);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -252,6 +249,7 @@ const FeaturedProperties = ({ data }): JSX.Element => {
                       </Grid>
                       <Grid item xs={6}>
                         <RezervationModal
+                          calendarId={room.calendarId}
                           title={room.name}
                           price={room.price}
                         />
