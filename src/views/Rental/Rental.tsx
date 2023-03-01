@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import Box from '@mui/material/Box';
 import Main from 'layouts/Main';
 import Container from 'components/Container';
-import KontaktDialog from '../../components/KontaktDialog';
+
 import {
   Advantages,
   Articles,
@@ -136,7 +136,6 @@ const Rental = (): JSX.Element => {
 
   return (
     <Main colorInvert={true}>
-      <KontaktDialog />
       <Hero data={heroSection} />
       <Box bgcolor={'alternate.main'}>
         <Container>

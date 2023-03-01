@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { graphql, useStaticQuery } from 'gatsby';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
@@ -20,6 +21,18 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
+export const query = graphql`
+  query {
+    contentfulWeb {
+      organization {
+        tel
+        email
+        instagram
+        id
+      }
+    }
+  }
+`;
 const BootstrapDialogTitle = (props) => {
   const { children, onClose, ...other } = props;
 
@@ -49,7 +62,8 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function CustomizedDialogs({}) {
+export default function CustomizedDialogs() {
+  const data = useStaticQuery(query);
   const { open, handleClose } = useContext(ReservationContext);
   return (
     <div>
@@ -72,18 +86,28 @@ export default function CustomizedDialogs({}) {
               variant="contained"
               fullWidth
               component={'a'}
-              href={`tel:725001393`}
+              href={`tel:${data.contentfulWeb.organization.tel}`}
             >
-              Telefon: 725001393
+              {data.contentfulWeb.organization.tel}
             </Button>
             <Button
               size={'large'}
               variant="contained"
               fullWidth
               component={'a'}
-              href={`mailto:petradedinova95@gmail.com`}
+              href={`mailto:${data.contentfulWeb.organization.email}`}
             >
-              Email: petradedinova95@gmail.com
+              {data.contentfulWeb.organization.email}
+            </Button>
+            <Button
+              size={'large'}
+              variant="contained"
+              target="_blank"
+              fullWidth
+              component={'a'}
+              href={data.contentfulWeb.organization.instagram}
+            >
+              Instagram
             </Button>
           </Stack>
         </DialogContent>

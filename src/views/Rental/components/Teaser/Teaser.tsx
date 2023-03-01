@@ -80,7 +80,7 @@ const Teaser = ({ data }): JSX.Element => {
                   <Grid item xs={12} sm={6} key={i}>
                     <Box
                       component={Card}
-                      variant={'outlined'}
+                      variant={'solid'}
                       bgcolor={'transparent'}
                       sx={{
                         cursor: 'pointer',

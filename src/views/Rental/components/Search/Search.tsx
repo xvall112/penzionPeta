@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'gatsby';
 import scrollTo from 'gatsby-plugin-smoothscroll';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -86,18 +87,19 @@ const Search = ({ data }): JSX.Element => {
             >
               <Box>
                 <Typography fontWeight={700} variant={'h6'} gutterBottom>
-                  Pronájem kol
+                  Prodej
                 </Typography>
                 <Typography color="text.secondary">
-                  4 horská kola k půjčení
+                  domácích produktů z farmy
                 </Typography>
               </Box>
               <Box display="flex" marginTop={{ xs: 2, md: 0 }}>
                 <Button
+                  component={Link}
                   variant="contained"
                   color="secondary"
                   size="large"
-                  onClick={handleClickOpen}
+                  to="/prodej"
                 >
                   Více
                 </Button>

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql, Link } from 'gatsby';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 import Badge from '@mui/material/Badge';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -202,15 +204,19 @@ export default function RezervationModal({ title, price, calendarId }) {
         maxWidth="md"
         fullScreen={isMd ? false : true}
       >
-        <DialogTitle>{title}</DialogTitle>
+        <DialogTitle>
+          <Box display="flex" justifyContent={'space-between'}>
+            {title}{' '}
+            <IconButton onClick={handleClose}>
+              <CloseIcon />
+            </IconButton>
+          </Box>
+        </DialogTitle>
         <DialogContent>
           <DialogContentText>Cena: {price} Kč/noc</DialogContentText>
           <Box mt={3}>
             <form onSubmit={formik.handleSubmit}>
               <Grid container spacing={4}>
-                <Grid xs={12}>
-                  <Typography align="center">Kalendář obsazenosti</Typography>
-                </Grid>
                 <Grid
                   item
                   xs={12}
@@ -461,11 +467,12 @@ export default function RezervationModal({ title, price, calendarId }) {
                 </Grid>
                 <Grid item container justifyContent={'center'} xs={12}>
                   <Button
-                    sx={{ height: 54, minWidth: 150 }}
+                    sx={{ height: 54 }}
                     variant="contained"
                     color="primary"
                     size="medium"
                     type="submit"
+                    fullWidth
                   >
                     Rezervovat
                   </Button>
@@ -476,23 +483,28 @@ export default function RezervationModal({ title, price, calendarId }) {
                     obratem kontaktovat
                   </Typography>
                 </Grid>
-                <Grid item xs={12}>
-                  <Divider />
-                </Grid>
-                <Grid item container justifyContent={'center'} xs={12}>
-                  <Box>
-                    <Typography component="p" variant="body2" align="left">
-                      Odesláním formuláře souhlasíte se{' '}
-                      <Box
-                        component="a"
-                        href=""
-                        color={theme.palette.text.primary}
-                        fontWeight={'700'}
-                      >
-                        Zpracováním osobních údajů
-                      </Box>
-                      ,{' '}
-                      {/*  <Box
+              </Grid>
+            </form>
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Typography
+            component="p"
+            variant="body2"
+            align="center"
+            sx={{ paddingY: 1 }}
+          >
+            Odesláním formuláře souhlasíte se{' '}
+            <Box
+              component={Link}
+              to="/zpracovaniOsobnichUdaju"
+              color={theme.palette.text.primary}
+              fontWeight={'700'}
+            >
+              Zpracováním osobních údajů
+            </Box>
+            ,{' '}
+            {/*  <Box
                         component="a"
                         href=""
                         color={theme.palette.text.primary}
@@ -509,16 +521,8 @@ export default function RezervationModal({ title, price, calendarId }) {
                       >
                         Cookie Policy
                       </Box> */}
-                      .
-                    </Typography>
-                  </Box>
-                </Grid>
-              </Grid>
-            </form>
-          </Box>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Zavřít</Button>
+            .
+          </Typography>
         </DialogActions>
       </Dialog>
     </div>

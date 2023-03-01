@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
+import { graphql, useStaticQuery, Link } from 'gatsby';
+import { ReservationContext } from '../../../../context/ReservationContext';
 import ListItemText from '@mui/material/ListItemText';
 import ListItem from '@mui/material/ListItem';
 import scrollTo from 'gatsby-plugin-smoothscroll';
 import Box from '@mui/material/Box';
-import { Link } from 'gatsby';
 import { Button, Typography } from '@mui/material';
 import { alpha, useTheme } from '@mui/material/styles';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -12,6 +12,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -44,6 +45,7 @@ const Topbar = ({
   pages,
   colorInvert = false,
 }: Props): JSX.Element => {
+  const { handleClickOpen } = useContext(ReservationContext);
   const data = useStaticQuery(query);
   const { email, instagram, tel } = data.contentfulWeb.organization;
   const theme = useTheme();
@@ -63,7 +65,6 @@ const Topbar = ({
         display={'flex'}
         component={Link}
         to={'/'}
-        width={{ xs: 100, md: 120 }}
         sx={{ textDecoration: 'none' }}
       >
         <Box height={1} width={1}>
@@ -80,7 +81,7 @@ const Topbar = ({
         </Box>
       </Box>
 
-      <Box display={'flex'} flexDirection={'row'}>
+      <Box flexDirection={'row'} display={{ xs: 'none', md: 'flex' }}>
         <Box
           component={ListItem}
           disableGutters
@@ -166,12 +167,46 @@ const Topbar = ({
 
       <Box marginLeft={1}>
         <Button
+          aria-label="Kontakt"
+          variant={'outlined'}
+          onClick={handleClickOpen}
+          sx={{
+            display: { md: 'none' },
+            borderRadius: 2,
+            padding: 1,
+            minWidth: 'auto',
+            borderColor: alpha(theme.palette.divider, 0.2),
+          }}
+        >
+          <PhoneIcon />
+        </Button>
+        <Button
+          component={Link}
+          to="/prodej"
+          href={instagram}
+          target="_blank"
+          aria-label="Instagram"
+          variant={'outlined'}
+          sx={{
+            borderRadius: 2,
+            minWidth: 'auto',
+            padding: 1,
+            marginX: 1,
+            borderColor: alpha(theme.palette.divider, 0.2),
+          }}
+        >
+          <ShoppingCartIcon />
+        </Button>
+
+        <Button
           variant="contained"
           color="primary"
           size="large"
+          component={Link}
+          to="/#rental"
           onClick={() => scrollTo('#rental')}
         >
-          REZERVOVAT
+          REZERVACE
         </Button>
       </Box>
     </Box>
