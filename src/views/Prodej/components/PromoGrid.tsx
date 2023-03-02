@@ -71,47 +71,42 @@ const PromoGrid = (): JSX.Element => {
             >
               <Grid
                 container
-                alignItems="center"
+                alignItems={{ xs: 'start', md: 'center' }}
                 direction={{ xs: 'column', sm: 'row-reverse' }}
+                spacing={2}
               >
                 <Grid item xs={12} md={6}>
-                  <Box sx={{ p: 4, mb: 2 }}>
-                    <GatsbyImage
-                      image={item.image.gatsbyImageData}
-                      alt={item.image.title}
-                      style={{ height: '100%', width: '100%' }}
-                    />
-                  </Box>
+                  <GatsbyImage
+                    image={item.image.gatsbyImageData}
+                    alt={item.image.title}
+                    style={{ height: '100%', width: '100%' }}
+                  />
                 </Grid>
                 <Grid item xs={12} md={6}>
-                  <Box>
-                    <Typography
-                      color={'text.secondary'}
-                      fontWeight={700}
-                      variant={'caption'}
-                      sx={{ textTransform: 'uppercase' }}
-                    >
-                      {item.smallTitle}
-                    </Typography>
-                    <Typography variant={'h5'} fontWeight={700} marginY={1}>
-                      {item.title}
-                    </Typography>
-                    <Typography color={'text.secondary'}>
-                      {item.price}
-                    </Typography>
-                    <Button
-                      variant="contained"
-                      onClick={handleClickOpen}
-                      sx={{
-                        textTransform: 'uppercase',
-                        display: 'block',
-                        mt: { xs: 2, sm: 4 },
-                        fontWeight: 700,
-                      }}
-                    >
-                      Koupit
-                    </Button>
-                  </Box>
+                  <Typography
+                    color={'text.secondary'}
+                    fontWeight={700}
+                    variant={'caption'}
+                    sx={{ textTransform: 'uppercase' }}
+                  >
+                    {item.smallTitle}
+                  </Typography>
+                  <Typography variant={'h5'} fontWeight={700} marginY={1}>
+                    {item.title}
+                  </Typography>
+                  <Typography color={'text.secondary'}>{item.price}</Typography>
+                  <Button
+                    variant="contained"
+                    onClick={handleClickOpen}
+                    sx={{
+                      textTransform: 'uppercase',
+                      display: 'block',
+                      mt: { xs: 2, sm: 4 },
+                      fontWeight: 700,
+                    }}
+                  >
+                    Koupit
+                  </Button>
                 </Grid>
               </Grid>
             </Card>
