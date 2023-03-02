@@ -14,20 +14,6 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
-interface Props {
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  onSidebarOpen: () => void;
-  pages: {
-    landings: Array<PageItem>;
-    company: Array<PageItem>;
-    account: Array<PageItem>;
-    secondary: Array<PageItem>;
-    blog: Array<PageItem>;
-    portfolio: Array<PageItem>;
-  };
-  colorInvert?: boolean;
-}
-
 export const query = graphql`
   query {
     contentfulWeb {
@@ -40,11 +26,7 @@ export const query = graphql`
   }
 `;
 
-const Topbar = ({
-  onSidebarOpen,
-  pages,
-  colorInvert = false,
-}: Props): JSX.Element => {
+const Topbar = (): JSX.Element => {
   const { handleClickOpen } = useContext(ReservationContext);
   const data = useStaticQuery(query);
   const { email, instagram, tel } = data.contentfulWeb.organization;

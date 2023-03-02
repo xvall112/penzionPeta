@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
+import { graphql, useStaticQuery, Link } from 'gatsby';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import ListItemText from '@mui/material/ListItemText';
 import ListItem from '@mui/material/ListItem';
-import Link from '@mui/material/Link';
+
 import Typography from '@mui/material/Typography';
 import { useTheme, alpha } from '@mui/material/styles';
 import { ReservationContext } from '../../../../context/ReservationContext';
@@ -173,21 +173,56 @@ const Footer = (): JSX.Element => {
           </Box>
         </Box>
       </Grid>
-      <Grid item xs={12}>
-        <Typography
-          align={'center'}
-          variant={'subtitle2'}
-          color="text.secondary"
-          gutterBottom
-        >
-          &copy; Domeček Jalovčí. 2023, All rights reserved
-        </Typography>
-        <Typography
-          align={'center'}
-          variant={'caption'}
-          color="text.secondary"
-          component={'p'}
-        ></Typography>
+      <Grid container item xs={12} spacing={2}>
+        <Grid item>
+          <Typography
+            align={'center'}
+            variant={'caption'}
+            color="text.primary"
+            component={Link}
+            to="/obchodniPodminky"
+          >
+            Obchodní podmínky
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Typography
+            align={'center'}
+            variant={'caption'}
+            color="text.primary"
+            component={Link}
+            to="/zpracovaniOsobnichUdaju"
+          >
+            Zpracování osobních údajů
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Typography
+            align={'center'}
+            variant={'caption'}
+            color="text.primary"
+            component={Link}
+            to="/ubytovaciRad"
+          >
+            Ubytovací řád
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography
+            align={'center'}
+            variant={'subtitle2'}
+            color="text.secondary"
+            gutterBottom
+          >
+            &copy; Domeček Jalovčí. 2023, All rights reserved
+          </Typography>
+          <Typography
+            align={'center'}
+            variant={'caption'}
+            color="text.secondary"
+            component={'p'}
+          ></Typography>
+        </Grid>
       </Grid>
     </Grid>
   );

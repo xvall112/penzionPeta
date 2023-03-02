@@ -7,7 +7,6 @@ import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import RezervationModal from './components/RezervationModal';
 import InfoModal from './components/InfoModal';
@@ -36,9 +35,6 @@ function SamplePrevArrow(props) {
 
 const FeaturedProperties = ({ data }): JSX.Element => {
   const theme = useTheme();
-  const isMd = useMediaQuery(theme.breakpoints.up('md'), {
-    defaultMatches: true,
-  });
 
   const settings = {
     dots: true,

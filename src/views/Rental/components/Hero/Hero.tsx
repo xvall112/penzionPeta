@@ -1,55 +1,100 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
-import { useTheme } from '@mui/material/styles';
+import { useTheme, alpha } from '@mui/material/styles';
 
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Container from 'components/Container';
-import {
-  IconButton,
-  Typography,
-  ImageList,
-  ImageListItem,
-  ImageListItemBar,
-} from '@mui/material';
+import { Box, Typography } from '@mui/material';
+
 const Hero = ({ data }): JSX.Element => {
+  useEffect(() => {
+    const jarallaxInit = async () => {
+      const jarallaxElems = document.querySelectorAll('.jarallax');
+      if (!jarallaxElems || (jarallaxElems && jarallaxElems.length === 0)) {
+        return;
+      }
+
+      const { jarallax } = await import('jarallax');
+      jarallax(jarallaxElems, { speed: 0.2 });
+    };
+
+    jarallaxInit();
+  });
   const theme = useTheme();
 
   return (
     <>
-      <ImageList
-        cols={1}
-        sx={{
-          width: '100%',
-          height: '100vh',
-          margin: '0px',
-        }}
+      <Box
+        className={'jarallax'}
+        data-jarallax
+        data-speed="0.2"
+        position={'relative'}
+        height={'100vh'}
+        display={'flex'}
+        alignItems={'center'}
+        marginTop={-13}
+        paddingTop={13}
+        id="agency__portfolio-item--js-scroll"
       >
-        <ImageListItem>
-          <GatsbyImage
-            image={data.backgroundImage.gatsbyImageData}
-            alt={data.backgroundImage.gatsbyImageData}
-            style={{ width: '100%', height: '100vh' }}
-          />
-          <ImageListItemBar
-            sx={{ height: '100vh' }}
-            position={'center'}
-            title={
-              <Typography variant="h1" fontWeight={700} align="center">
-                {data.title}
-              </Typography>
-            }
-            subtitle={
-              <>
-                <Typography variant="h5" align="center">
-                  {data.subtitle}
-                </Typography>
-              </>
-            }
-            actionIcon={<KeyboardArrowDownIcon />}
-          />
-        </ImageListItem>
-      </ImageList>
+        <Box
+          className={'jarallax-img'}
+          component={GatsbyImage}
+          image={data.backgroundImage.gatsbyImageData}
+          alt={data.backgroundImage.title}
+          sx={{
+            position: 'absolute',
+            objectFit: 'cover',
+            /* support for plugin https://github.com/bfred-it/object-fit-images */
+            fontFamily: 'object-fit: cover;',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            zIndex: -1,
+          }}
+        />
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            width: 1,
+            height: 1,
+            background: alpha(theme.palette.common.black, 0.5),
+            zIndex: 1,
+          }}
+        />
+        <Container position={'relative'} zIndex={2}>
+          <Box>
+            <Typography
+              variant="h1"
+              align="center"
+              gutterBottom
+              sx={{
+                fontWeight: 900,
+                color: 'common.white',
+                textTransform: 'uppercase',
+              }}
+            >
+              {data.title}
+            </Typography>
+            <Typography
+              variant="h4"
+              align="center"
+              component="p"
+              color="text.primary"
+              sx={{
+                color: 'common.white',
+              }}
+            >
+              {data.subtitle}
+            </Typography>
+          </Box>
+        </Container>
+      </Box>
     </>
   );
 };

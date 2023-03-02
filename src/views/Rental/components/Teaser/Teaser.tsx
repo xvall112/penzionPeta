@@ -13,7 +13,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { style } from '@mui/system';
+import { style, alpha } from '@mui/system';
 
 const Teaser = ({ data }): JSX.Element => {
   const theme = useTheme();
@@ -235,30 +235,18 @@ const Teaser = ({ data }): JSX.Element => {
                   data-aos-delay={i * 100}
                   data-aos-offset={100}
                   data-aos-duration={600}
+                  sx={{ backgroundColor: theme.palette.primary.main }}
                 >
-                  <Box
+                  {/*  <Box
                     position={'relative'}
                     display={'flex'}
                     justifyContent={'center'}
                   >
                     <Box
-                      width={50}
-                      height={50}
-                      bgcolor={'secondary.main'}
-                      borderRadius={'100%'}
-                      sx={{
-                        transform: `translate(${theme.spacing(
-                          2,
-                        )}, ${theme.spacing(-2)})`,
-                        marginTop: 2,
-                      }}
-                    />
-                    <Box
-                      sx={{
-                        color: 'primary.main',
-                        position: 'absolute',
-                        bottom: 0,
-                      }}
+                      component={Avatar}
+                      variant={'rounded'}
+                      color={theme.palette.primary.dark}
+                      bgcolor={alpha(theme.palette.primary.light, 0.2)}
                     >
                       <svg
                         height={48}
@@ -270,11 +258,12 @@ const Teaser = ({ data }): JSX.Element => {
                         <path d={item.icon.icon} />
                       </svg>
                     </Box>
-                  </Box>
+                  </Box> */}
                   <Typography
                     variant={'subtitle1'}
                     align={'center'}
-                    sx={{ fontWeight: 700, marginTop: 2 }}
+                    sx={{ fontWeight: 700, marginY: 2 }}
+                    color="common.white"
                   >
                     {item.title}
                   </Typography>

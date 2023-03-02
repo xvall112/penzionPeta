@@ -6,11 +6,8 @@ import Container from 'components/Container';
 
 import {
   Advantages,
-  Articles,
-  AskExpert,
   FeaturedProperties,
   Hero,
-  Partners,
   Places,
   Reviews,
   Search,
@@ -35,9 +32,11 @@ export const query = graphql`
         title
       }
       infoSection {
-        subtitle
+        subtitle {
+          subtitle
+        }
         title
-        hireBikeInfo
+
         services {
           title
           subtitle
@@ -146,9 +145,7 @@ const Rental = (): JSX.Element => {
       <Container>
         <Teaser data={equipmentSection} />
       </Container>
-      {/*   <Container sx={{ paddingTop: '0 !important' }}>
-        <Articles />
-      </Container> */}
+
       <Box bgcolor={'alternate.main'} id="rental">
         <Container>
           <FeaturedProperties data={roomsSection} />
@@ -162,17 +159,10 @@ const Rental = (): JSX.Element => {
           <Reviews data={reviews} />
         </Container>
       </Box>
-      {/* <Container>
-        <Partners />
-      </Container> */}
 
       <Container>
         <Advantages data={placesSection} />
       </Container>
-
-      {/*  <Container>
-        <AskExpert />
-      </Container> */}
     </Main>
   );
 };
