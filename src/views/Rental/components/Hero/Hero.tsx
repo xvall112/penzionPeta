@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import { useTheme, alpha } from '@mui/material/styles';
-
+import { StaticImage } from 'gatsby-plugin-image';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Container from 'components/Container';
 import { Box, Typography } from '@mui/material';
@@ -30,7 +30,7 @@ const Hero = ({ data }): JSX.Element => {
         data-jarallax
         data-speed="0.2"
         position={'relative'}
-        height={'100vh'}
+        height={'110vh'}
         display={'flex'}
         alignItems={'center'}
         marginTop={-13}
@@ -69,7 +69,14 @@ const Hero = ({ data }): JSX.Element => {
         />
         <Container position={'relative'} zIndex={2}>
           <Box>
-            <Typography
+            <StaticImage
+              src={'../../../../images/logoObdelnik.png'}
+              alt="logo"
+              style={{ height: '100%' }}
+            />
+          </Box>
+          <Box>
+            {/* <Typography
               variant="h1"
               align="center"
               gutterBottom
@@ -80,7 +87,7 @@ const Hero = ({ data }): JSX.Element => {
               }}
             >
               {data.title}
-            </Typography>
+            </Typography> */}
             <Typography
               variant="h4"
               align="center"

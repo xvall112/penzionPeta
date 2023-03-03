@@ -1251,6 +1251,11 @@
     "minimatch" "^3.0.4"
     "strip-json-comments" "^3.1.1"
 
+"@fontsource/darker-grotesque@^4.5.9":
+  "integrity" "sha512-B6XeGf0toFs67eQKyTB12zy+aktfnHDE1UT6nTEDYYl0L/wLhbH/Qh1qHSUUhWHF8kxfq+NycLBTGtmRD8s8Hw=="
+  "resolved" "https://registry.npmjs.org/@fontsource/darker-grotesque/-/darker-grotesque-4.5.9.tgz"
+  "version" "4.5.9"
+
 "@gatsbyjs/parcel-namer-relative-to-cwd@^1.6.0":
   "integrity" "sha512-Z5RuA+CuhVTb/xyZePxzFG5KhzDkRzs3e6sBz+WOZnTKGEleN8yxGpATjINL9V7suO9by7bKY3RdRv77qMP+rA=="
   "resolved" "https://registry.npmjs.org/@gatsbyjs/parcel-namer-relative-to-cwd/-/parcel-namer-relative-to-cwd-1.6.0.tgz"
@@ -6521,6 +6526,17 @@
     "gatsby-plugin-utils" "^3.15.0"
     "objectFitPolyfill" "^2.3.5"
     "prop-types" "^15.8.1"
+
+"gatsby-plugin-manifest@^4.25.0":
+  "integrity" "sha512-2n7v+TvhWUMoOJEaeiPDFsf9jvOImKLZpnzxE8e6ZeeoGeDngXSZhkkP3x2UYIknHtZXUUjFJh8BaVBXiB1dSQ=="
+  "resolved" "https://registry.npmjs.org/gatsby-plugin-manifest/-/gatsby-plugin-manifest-4.25.0.tgz"
+  "version" "4.25.0"
+  dependencies:
+    "@babel/runtime" "^7.15.4"
+    "gatsby-core-utils" "^3.25.0"
+    "gatsby-plugin-utils" "^3.19.0"
+    "semver" "^7.3.7"
+    "sharp" "^0.30.7"
 
 "gatsby-plugin-material-ui@^3.0.1":
   "integrity" "sha512-HuIjm9MuE5wRiHK/MBrUMeNpSs3Gh8V9cKnt8wWKlyDKUoKcn6tQSqn5T8V8IADA4OFTo3Lq2gexOCbaulHUdg=="

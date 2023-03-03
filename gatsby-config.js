@@ -18,6 +18,18 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Domecek Jalovci`,
+        short_name: `Jalovci`,
+        start_url: `/`,
+        background_color: `#fff`,
+        theme_color: `#fff`,
+        display: `standalone`,
+        icon: `src/images/logo.png`,
+      },
+    },
+    {
       resolve: `gatsby-source-google-calendar`,
       options: {
         calendarIds: [

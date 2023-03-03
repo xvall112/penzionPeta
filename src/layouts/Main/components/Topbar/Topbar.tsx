@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { graphql, useStaticQuery, Link } from 'gatsby';
+import { StaticImage } from 'gatsby-plugin-image';
 import { ReservationContext } from '../../../../context/ReservationContext';
 import ListItemText from '@mui/material/ListItemText';
 import ListItem from '@mui/material/ListItem';
@@ -49,17 +50,13 @@ const Topbar = (): JSX.Element => {
         to={'/'}
         sx={{ textDecoration: 'none' }}
       >
-        <Box height={1} width={1}>
-          <Typography
-            variant="h4"
-            gutterBottom
-            color="primary"
-            sx={{
-              fontWeight: 900,
-            }}
-          >
-            DJ
-          </Typography>
+        <Box height={'50px'} width="50px">
+          <StaticImage
+            src={'../../../../images/20.svg'}
+            alt="logo"
+            style={{ height: '100%' }}
+            imgStyle={{ borderRadius: '10px', WebkitBorderRadius: '10px' }}
+          />
         </Box>
       </Box>
 

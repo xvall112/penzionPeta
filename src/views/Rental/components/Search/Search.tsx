@@ -41,6 +41,7 @@ const Search = ({ data }): JSX.Element => {
           <Box
             padding={{ xs: 3, sm: 6 }}
             width={1}
+            height={1}
             component={Card}
             boxShadow={3}
             data-aos="fade-up"
@@ -76,6 +77,7 @@ const Search = ({ data }): JSX.Element => {
           <Box
             padding={{ xs: 3, sm: 6 }}
             width={1}
+            height={1}
             component={Card}
             boxShadow={3}
             data-aos="fade-up"
@@ -125,6 +127,7 @@ const Search = ({ data }): JSX.Element => {
               <Box display={'flex'} flexDirection={'column'}>
                 <Box
                   component={Avatar}
+                  variant="rounded"
                   width={50}
                   height={50}
                   marginBottom={2}

@@ -227,7 +227,7 @@ const Teaser = ({ data }): JSX.Element => {
                 <Box
                   component={Card}
                   variant={'outlined'}
-                  bgcolor={'transparent'}
+                  bgcolor={theme.palette.primary.main}
                   padding={2}
                   width={1}
                   height={1}
@@ -235,7 +235,6 @@ const Teaser = ({ data }): JSX.Element => {
                   data-aos-delay={i * 100}
                   data-aos-offset={100}
                   data-aos-duration={600}
-                  sx={{ backgroundColor: theme.palette.primary.main }}
                 >
                   {/*  <Box
                     position={'relative'}

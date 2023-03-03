@@ -110,7 +110,7 @@ export default function RezervationModal({ title, price, calendarId }) {
 
   const data = useStaticQuery(query);
 
-  const filtredCalendars = data.allCalendar.nodes.filter((item) =>
+  const filtredCalendars = data?.allCalendar?.nodes.filter((item) =>
     calendarId.includes(item.id),
   );
 
@@ -133,8 +133,8 @@ export default function RezervationModal({ title, price, calendarId }) {
 
   filtredCalendars.map((calendar) => {
     calendar.children.map((event) => {
-      const startDate = new Date(event.start.date);
-      const endDate = new Date(event.end.date);
+      const startDate = new Date(event?.start?.date);
+      const endDate = new Date(event?.end?.date);
       getRangeDates(startDate, endDate);
     });
   });
@@ -323,11 +323,7 @@ export default function RezervationModal({ title, price, calendarId }) {
                             dayjs(formik.values.odjezd, 'day'),
                           )
                         ) {
-                          formik.setFieldValue(
-                            'odjezd',
-                            null,
-                            /* dayjs(newValue).add(+3, 'day') */
-                          );
+                          formik.setFieldValue('odjezd', null);
                         }
                       }}
                       renderInput={(params) => (
@@ -390,11 +386,7 @@ export default function RezervationModal({ title, price, calendarId }) {
                             dayjs(formik.values.prijezd, 'day'),
                           )
                         ) {
-                          formik.setFieldValue(
-                            'prijezd',
-                            null,
-                            /* dayjs(newValue).add(+3, 'day') */
-                          );
+                          formik.setFieldValue('prijezd', null);
                         }
                       }}
                       renderInput={(params) => (
@@ -536,25 +528,7 @@ export default function RezervationModal({ title, price, calendarId }) {
             >
               Zpracováním osobních údajů
             </Box>
-            ,{' '}
-            {/*  <Box
-                        component="a"
-                        href=""
-                        color={theme.palette.text.primary}
-                        fontWeight={'700'}
-                      >
-                        Data Policy
-                      </Box>{' '}
-                      and{' '}
-                      <Box
-                        component="a"
-                        href=""
-                        color={theme.palette.text.primary}
-                        fontWeight={'700'}
-                      >
-                        Cookie Policy
-                      </Box> */}
-            .
+            , .
           </Typography>
         </DialogActions>
       </Dialog>
