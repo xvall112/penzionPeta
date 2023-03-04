@@ -8,10 +8,10 @@ module.exports = {
     title: 'Domeček Jalovčí',
     description:
       'Penzion Domeček Jalovčí. Ubytovani a agroturistika v malé zemědělské usedlosti v oblsati Středočeského kraje nedaleko Kamýku nad Vltavou',
-    titleTemplate: '%s - Domeček Jalovčí',
+    titleTemplate: ' - Domeček Jalovčí',
     siteUrl: 'https://www.domecekjalovci.netlify.com',
     author: '@Lukas Valta <valtalukas@sezanm.cz>',
-    image: '/src/images/24.png',
+    image: '/24.png',
     social: {
       twitter: 'Lukas',
     },

@@ -5,10 +5,15 @@ import SEO from '../components/Seo';
 const Prodej = (): JSX.Element => {
   return (
     <>
-      <SEO title="Prodej" description="prodej domácíxh produktů z naší farmy" />
       <ProdejIndex />
     </>
   );
 };
 
 export default Prodej;
+
+export function Head() {
+  return (
+    <SEO title="Prodej" description="prodej domácíxh produktů z naší farmy" />
+  );
+}

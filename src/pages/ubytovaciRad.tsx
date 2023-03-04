@@ -17,7 +17,6 @@ const UbytovaciRad = (): JSX.Element => {
   const data = useStaticQuery(query);
   return (
     <>
-      <SEO title="Ubytovací řád" />
       <CompanyTerms
         title={'Ubztovací řád penzion Jalovčí'}
         content={data.contentfulOrganization.ubytovacD}
@@ -27,3 +26,7 @@ const UbytovaciRad = (): JSX.Element => {
 };
 
 export default UbytovaciRad;
+
+export function Head() {
+  return <SEO title="Ubytovací řád" />;
+}

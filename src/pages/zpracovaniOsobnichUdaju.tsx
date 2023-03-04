@@ -17,7 +17,6 @@ const Prodej = (): JSX.Element => {
   const data = useStaticQuery(query);
   return (
     <>
-      <SEO title="Zpracování osobních údajů" />
       <CompanyTerms
         title={'Zpracování osobních údajů penzion Jalovčí'}
         content={data.contentfulOrganization.zpraconnOsobnchDaj}
@@ -27,3 +26,7 @@ const Prodej = (): JSX.Element => {
 };
 
 export default Prodej;
+
+export function Head() {
+  return <SEO title="Zpracování osobních údajů" />;
+}

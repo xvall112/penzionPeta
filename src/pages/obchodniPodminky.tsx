@@ -17,7 +17,6 @@ const ObchodniPodmiky = (): JSX.Element => {
   const data = useStaticQuery(query);
   return (
     <>
-      <SEO title="Obchodní Podmíky" />
       <CompanyTerms
         title={'Obchodní Podmíky penzion Jalovčí'}
         content={data.contentfulOrganization.obchodnPodmnky}
@@ -27,3 +26,11 @@ const ObchodniPodmiky = (): JSX.Element => {
 };
 
 export default ObchodniPodmiky;
+export function Head() {
+  return (
+    <SEO
+      title="Obchodní Podmíky"
+      description="Ubytování v penzionu Domeček Jalovčí"
+    />
+  );
+}

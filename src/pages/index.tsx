@@ -5,13 +5,17 @@ import SEO from '../components/Seo';
 const IndexPage = (): JSX.Element => {
   return (
     <>
-      <SEO
-        title="Ubytování a agroturistika"
-        description="Ubytování v penzionu Domeček Jalovčí"
-      />
       <Rental />
     </>
   );
 };
 
 export default IndexPage;
+export function Head() {
+  return (
+    <SEO
+      title="Domeček Jalovčí"
+      description="Ubytování a agroturistika v malebné vesničce Třtí-Jalovčí v malé zemědělské usedlosti."
+    />
+  );
+}
