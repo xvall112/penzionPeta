@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"componentChunkName":"component---src-pages-obchodni-podminky-tsx","path":"/obchodniPodminky/","result":{"pageContext":{}},"staticQueryHashes":["1017039329","1041936915","2608139685","2714996303","2907756981","3221510487","3291740889","3818041675","4248094614","82277420"]}
+=======
+{"componentChunkName":"component---src-pages-obchodni-podminky-tsx","path":"/obchodniPodminky/","result":{"pageContext":{}},"staticQueryHashes":["1017039329","1041936915","1310591409","2608139685","2714996303","2907756981","3221510487","3291740889","3818041675","4248094614","82277420"]}
+>>>>>>> b617ea472b45d1aa85c097fbe2c68c7c940e6c01

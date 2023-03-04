@@ -17,10 +17,7 @@ const Prodej = (): JSX.Element => {
   const data = useStaticQuery(query);
   return (
     <>
-      <SEO
-        title="Zpracování osobních údajů"
-        description="Ubytování v penzionu Domeček Jalovčí"
-      />
+      <SEO title="Zpracování osobních údajů" />
       <CompanyTerms
         title={'Zpracování osobních údajů penzion Jalovčí'}
         content={data.contentfulOrganization.zpraconnOsobnchDaj}

@@ -10,6 +10,7 @@ import Avatar from '@mui/material/Avatar';
 import { ReservationContext } from '../../../../context/ReservationContext';
 import { useTheme } from '@mui/material/styles';
 import { FaBeer } from '@react-icons/all-files/fa/FaBeer';
+
 const Search = ({ data }): JSX.Element => {
   const { handleClickOpen } = useContext(ReservationContext);
   const theme = useTheme();
@@ -32,7 +33,7 @@ const Search = ({ data }): JSX.Element => {
           data-aos={'fade-up'}
           sx={{ textAlign: { xs: 'left', md: 'center' } }}
         >
-          {data.subtitle}
+          {data.subtitle.subtitle}
         </Typography>
       </Box>
       <Grid container spacing={{ xs: 1, md: 4 }}>
@@ -40,6 +41,7 @@ const Search = ({ data }): JSX.Element => {
           <Box
             padding={{ xs: 3, sm: 6 }}
             width={1}
+            height={1}
             component={Card}
             boxShadow={3}
             data-aos="fade-up"
@@ -75,6 +77,7 @@ const Search = ({ data }): JSX.Element => {
           <Box
             padding={{ xs: 3, sm: 6 }}
             width={1}
+            height={1}
             component={Card}
             boxShadow={3}
             data-aos="fade-up"
@@ -124,6 +127,7 @@ const Search = ({ data }): JSX.Element => {
               <Box display={'flex'} flexDirection={'column'}>
                 <Box
                   component={Avatar}
+                  variant="rounded"
                   width={50}
                   height={50}
                   marginBottom={2}

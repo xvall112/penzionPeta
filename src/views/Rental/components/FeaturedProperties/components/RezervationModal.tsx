@@ -27,6 +27,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { PickersDay, PickersDayProps } from '@mui/x-date-pickers/PickersDay';
+
 import { google } from 'googleapis';
 import 'dayjs/locale/cs';
 
@@ -109,7 +110,7 @@ export default function RezervationModal({ title, price, calendarId }) {
 
   const data = useStaticQuery(query);
 
-  const filtredCalendars = data.allCalendar.nodes.filter((item) =>
+  const filtredCalendars = data?.allCalendar?.nodes.filter((item) =>
     calendarId.includes(item.id),
   );
 
@@ -132,13 +133,14 @@ export default function RezervationModal({ title, price, calendarId }) {
 
   filtredCalendars.map((calendar) => {
     calendar.children.map((event) => {
-      const startDate = new Date(event.start.date);
-      const endDate = new Date(event.end.date);
+      const startDate = new Date(event?.start?.date);
+      const endDate = new Date(event?.end?.date);
       getRangeDates(startDate, endDate);
     });
   });
 
   const initialValues = {
+    pokoj: title,
     prijezd: null,
     odjezd: null,
     name: '',
@@ -159,6 +161,30 @@ export default function RezervationModal({ title, price, calendarId }) {
         2,
       ),
     );
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encode({
+        'form-name': 'RezervacniFormular',
+        ...values,
+        prijezd: dayjs(values.prijezd).format('DD.MM.YYYY'),
+        odjezd: dayjs(values.odjezd).format('DD.MM.YYYY'),
+      }),
+    })
+      .then(() => {
+        cogoToast.success(
+          'Rezervace byla odeslána, pro potvrzení rezervace Vás budeme kontaktovat',
+          {
+            position: 'top-center',
+          },
+        );
+        formik.resetForm();
+      })
+      .catch((error) =>
+        cogoToast.alert('Něco se pokazilo, odešlete rezervaci znovu', {
+          position: 'top-center',
+        }),
+      );
   };
 
   const formik = useFormik({
@@ -215,7 +241,13 @@ export default function RezervationModal({ title, price, calendarId }) {
         <DialogContent>
           <DialogContentText>Cena: {price} Kč/noc</DialogContentText>
           <Box mt={3}>
-            <form onSubmit={formik.handleSubmit}>
+            <form
+              onSubmit={formik.handleSubmit}
+              data-netlify="true"
+              name="RezervacniFormular"
+              method="post"
+            >
+              <input type="hidden" name="RezervacniFormular" value="contact" />
               <Grid container spacing={4}>
                 <Grid
                   item
@@ -291,11 +323,7 @@ export default function RezervationModal({ title, price, calendarId }) {
                             dayjs(formik.values.odjezd, 'day'),
                           )
                         ) {
-                          formik.setFieldValue(
-                            'odjezd',
-                            null,
-                            /* dayjs(newValue).add(+3, 'day') */
-                          );
+                          formik.setFieldValue('odjezd', null);
                         }
                       }}
                       renderInput={(params) => (
@@ -358,11 +386,7 @@ export default function RezervationModal({ title, price, calendarId }) {
                             dayjs(formik.values.prijezd, 'day'),
                           )
                         ) {
-                          formik.setFieldValue(
-                            'prijezd',
-                            null,
-                            /* dayjs(newValue).add(+3, 'day') */
-                          );
+                          formik.setFieldValue('prijezd', null);
                         }
                       }}
                       renderInput={(params) => (
@@ -473,6 +497,7 @@ export default function RezervationModal({ title, price, calendarId }) {
                     size="medium"
                     type="submit"
                     fullWidth
+                    disabled={formik.isSubmitting}
                   >
                     Rezervovat
                   </Button>
@@ -503,25 +528,7 @@ export default function RezervationModal({ title, price, calendarId }) {
             >
               Zpracováním osobních údajů
             </Box>
-            ,{' '}
-            {/*  <Box
-                        component="a"
-                        href=""
-                        color={theme.palette.text.primary}
-                        fontWeight={'700'}
-                      >
-                        Data Policy
-                      </Box>{' '}
-                      and{' '}
-                      <Box
-                        component="a"
-                        href=""
-                        color={theme.palette.text.primary}
-                        fontWeight={'700'}
-                      >
-                        Cookie Policy
-                      </Box> */}
-            .
+            , .
           </Typography>
         </DialogActions>
       </Dialog>

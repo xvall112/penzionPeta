@@ -5,10 +5,7 @@ import SEO from '../components/Seo';
 const Prodej = (): JSX.Element => {
   return (
     <>
-      <SEO
-        title="Ubytování a agroturistika"
-        description="Ubytování v penzionu Domeček Jalovčí"
-      />
+      <SEO title="Prodej" description="prodej domácíxh produktů z naší farmy" />
       <ProdejIndex />
     </>
   );

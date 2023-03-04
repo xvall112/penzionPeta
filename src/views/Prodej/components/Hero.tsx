@@ -54,6 +54,7 @@ const Hero = (): JSX.Element => {
         className={'jarallax-img'}
         component={GatsbyImage}
         image={backgroundImage.gatsbyImageData}
+        alt={backgroundImage.title}
         sx={{
           position: 'absolute',
           objectFit: 'cover',
