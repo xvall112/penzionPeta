@@ -30,7 +30,7 @@ const Hero = ({ data }): JSX.Element => {
         data-jarallax
         data-speed="0.2"
         position={'relative'}
-        height={'110vh'}
+        height={'120vh'}
         display={'flex'}
         alignItems={'center'}
         marginTop={-13}
@@ -70,7 +70,7 @@ const Hero = ({ data }): JSX.Element => {
 
         <Box margin={'0 auto'} maxWidth="600px" zIndex={2} px={2}>
           <StaticImage
-            src={'../../../../images/logoObdelnik.png'}
+            src={'../../../../images/logoObdelnikWhite.png'}
             alt="logo"
             style={{ height: '100%', maxWidth: '100%' }}
           />

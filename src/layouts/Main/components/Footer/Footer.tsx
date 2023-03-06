@@ -161,7 +161,7 @@ const Footer = (): JSX.Element => {
               marginHeight={0}
               marginWidth={0}
               scrolling="no"
-              src="https://maps.google.com/maps?width=100%&height=100%&hl=en&q=Třtí&ie=UTF8&t=&z=12&iwloc=B&output=embed"
+              src="https://maps.google.com/maps?width=100%&height=100%&hl=cs&q=Domeček+Jalovčí&ie=UTF8&t=&z=12&iwloc=B&output=embed"
               style={{
                 minHeight: 400,
                 filter:
