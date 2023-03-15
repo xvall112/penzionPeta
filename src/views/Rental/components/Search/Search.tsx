@@ -7,12 +7,9 @@ import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
-import { ReservationContext } from '../../../../context/ReservationContext';
 import { useTheme } from '@mui/material/styles';
-import { FaBeer } from '@react-icons/all-files/fa/FaBeer';
 
 const Search = ({ data }): JSX.Element => {
-  const { handleClickOpen } = useContext(ReservationContext);
   const theme = useTheme();
   return (
     <Box>
@@ -36,8 +33,8 @@ const Search = ({ data }): JSX.Element => {
           {data.subtitle.subtitle}
         </Typography>
       </Box>
-      <Grid container spacing={{ xs: 1, md: 4 }}>
-        <Grid item xs={12} sm={6}>
+      <Grid container spacing={{ xs: 1, md: 4 }} justifyContent="center">
+        <Grid item xs={12}>
           <Box
             padding={{ xs: 3, sm: 6 }}
             width={1}
@@ -45,22 +42,30 @@ const Search = ({ data }): JSX.Element => {
             component={Card}
             boxShadow={3}
             data-aos="fade-up"
+            sx={{ border: `1px solid ${theme.palette.secondary.dark}` }}
           >
             <Box
               display={'flex'}
-              justifyContent={'space-between'}
-              alignItems={{ xs: 'flex-start', sm: 'center' }}
-              flexDirection={{ xs: 'column', sm: 'row' }}
+              justifyContent={'center'}
+              alignItems={{ xs: 'center', sm: 'center' }}
+              flexDirection={'column'}
             >
               <Box>
-                <Typography fontWeight={700} variant={'h6'} gutterBottom>
+                <Typography
+                  fontWeight={700}
+                  variant={'h6'}
+                  align="center"
+                  gutterBottom
+                >
                   Ubytování
                 </Typography>
-                <Typography color="text.secondary">
+              </Box>
+              <Box>
+                <Typography color="text.secondary" align="center" gutterBottom>
                   3x dvoulůžkový pokoj s vlastním sociálním zařízení{' '}
                 </Typography>
               </Box>
-              <Box display="flex" marginTop={{ xs: 2, md: 0 }}>
+              <Box marginTop={{ xs: 2 }}>
                 <Button
                   variant="contained"
                   size="large"
@@ -73,7 +78,7 @@ const Search = ({ data }): JSX.Element => {
             </Box>
           </Box>
         </Grid>
-        <Grid item xs={12} sm={6}>
+        {/* <Grid item xs={12} sm={6}>
           <Box
             padding={{ xs: 3, sm: 6 }}
             width={1}
@@ -109,7 +114,7 @@ const Search = ({ data }): JSX.Element => {
               </Box>
             </Box>
           </Box>
-        </Grid>
+        </Grid> */}
 
         {data.services.map((item, i) => (
           <Grid item xs={12} sm={4} md={3} key={i}>
