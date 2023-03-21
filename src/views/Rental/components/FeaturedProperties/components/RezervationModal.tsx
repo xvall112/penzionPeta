@@ -237,12 +237,18 @@ export default function RezervationModal({ title, price, calendarId }) {
           <DialogContentText>Cena: {price} Kč/noc</DialogContentText>
           <Box mt={3}>
             <form
-              onSubmit={formik.handleSubmit}
-              data-netlify="true"
               name="RezervacniFormular"
               method="POST"
+              netlify-honeypot="bot-field"
+              onSubmit={formik.handleSubmit}
+              data-netlify="true"
             >
-              <input type="hidden" name="RezervacniFormular" value="contact" />
+              <input
+                type="hidden"
+                name="form-name"
+                value="RezervacniFormular"
+              />
+              <input type="hidden" name="bot-field" />
               <Grid container spacing={4}>
                 <Grid
                   item
