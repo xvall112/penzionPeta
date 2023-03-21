@@ -43,9 +43,6 @@ export const query = graphql`
           icon {
             icon
           }
-          ic {
-            ic
-          }
         }
       }
       equipmentSection {
