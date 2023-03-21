@@ -186,6 +186,7 @@ export default function RezervationModal({ title, price, calendarId }) {
           },
         );
         formik.resetForm();
+        handleClose();
       })
       .catch((error) =>
         cogoToast.alert('Něco se pokazilo, odešlete rezervaci znovu', {
