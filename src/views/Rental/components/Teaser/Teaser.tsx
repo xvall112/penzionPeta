@@ -210,7 +210,7 @@ const Teaser = ({ data }): JSX.Element => {
               Vhodné pro
             </Typography>
           </Grid>
-          {data.suitFor.map((item, i) => (
+          {data.for.map((item, i) => (
             <Grid item xs={6} md={3} key={i}>
               <Box
                 display={'block'}
@@ -264,7 +264,7 @@ const Teaser = ({ data }): JSX.Element => {
                     sx={{ fontWeight: 700, marginY: 2 }}
                     color="common.white"
                   >
-                    {item.title}
+                    {item}
                   </Typography>
                 </Box>
               </Box>

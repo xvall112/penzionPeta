@@ -62,7 +62,7 @@ const Search = ({ data }): JSX.Element => {
               </Box>
               <Box>
                 <Typography color="text.secondary" align="center" gutterBottom>
-                  3x dvoulůžkový pokoj s vlastním sociálním zařízení{' '}
+                  {data.ubytovani}
                 </Typography>
               </Box>
               <Box marginTop={{ xs: 2 }}>

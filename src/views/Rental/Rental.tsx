@@ -36,7 +36,7 @@ export const query = graphql`
           subtitle
         }
         title
-
+        ubytovani
         services {
           title
           subtitle
@@ -58,12 +58,7 @@ export const query = graphql`
           title
           gatsbyImageData(placeholder: BLURRED, aspectRatio: 1)
         }
-        suitFor {
-          title
-          icon {
-            icon
-          }
-        }
+        for
       }
       roomsSection {
         smallTitle
