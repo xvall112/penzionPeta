@@ -247,7 +247,7 @@ export default function RezervationModal({ title, price, calendarId }) {
                 name="form-name"
                 value="RezervacniFormular"
               />
-
+              <input type="hidden" name="pokoj" value={formik.values.pokoj} />
               <Grid container spacing={4}>
                 <Grid
                   item
@@ -443,7 +443,7 @@ export default function RezervationModal({ title, price, calendarId }) {
                   <TextField
                     sx={{ height: 54 }}
                     label="Tel"
-                    type="text"
+                    type="tel"
                     variant="outlined"
                     color="primary"
                     size="medium"

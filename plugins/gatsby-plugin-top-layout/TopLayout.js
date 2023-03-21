@@ -17,6 +17,7 @@ export default function TopLayout(props) {
   return (
     <React.Fragment>
       <form method="POST" data-netlify="true" name="RezervacniFormular" hidden>
+        <input type="hidden" name="pokoj" value="recenze" />
         <input type="date" name="prijezd" value="recenze" />
         <input type="date" name="odjezd" value="recenze" />
         <input type="text" name="name" value="recenze" />
