@@ -150,7 +150,7 @@ export default function RezervationModal({ title, price, calendarId }) {
   };
 
   const onSubmit = (values) => {
-    alert(
+    /* alert(
       JSON.stringify(
         {
           ...values,
@@ -160,7 +160,7 @@ export default function RezervationModal({ title, price, calendarId }) {
         null,
         2,
       ),
-    );
+    ); */
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -201,18 +201,6 @@ export default function RezervationModal({ title, price, calendarId }) {
     setOpen(false);
   };
 
-  const checkDates = (start, end) => {
-    const currentDate = new Date(start);
-    const endDate = new Date(end);
-    while (currentDate <= endDate) {
-      const date = new Date(currentDate);
-      const dates = date.toISOString().split('T')[0];
-      disabledDates.includes(dates) === true &&
-        formik.setFieldError('odjezd', 'nepovolena hodnota');
-      currentDate.setDate(currentDate.getDate() + 1);
-    }
-  };
-
   return (
     <div>
       <Button
@@ -245,9 +233,13 @@ export default function RezervationModal({ title, price, calendarId }) {
               onSubmit={formik.handleSubmit}
               data-netlify="true"
               name="RezervacniFormular"
-              method="post"
+              method="POST"
             >
-              <input type="hidden" name="RezervacniFormular" value="contact" />
+              <input
+                type="hidden"
+                name="form-name"
+                value="RezervacniFormular"
+              />
               <Grid container spacing={4}>
                 <Grid
                   item
