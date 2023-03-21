@@ -16,6 +16,14 @@ import '@fontsource/darker-grotesque/700.css';
 export default function TopLayout(props) {
   return (
     <React.Fragment>
+      <form method="POST" data-netlify="true" name="RezervacniFormular" hidden>
+        <input type="date" name="prijezd" value="recenze" />
+        <input type="date" name="odjezd" value="recenze" />
+        <input type="text" name="name" value="recenze" />
+        <input type="tel" name="tel" value="recenze" />
+        <input type="email" name="email" value="recenze" />
+        <textarea name="message" value="recenze"></textarea>
+      </form>
       <Page>{props.children}</Page>
     </React.Fragment>
   );

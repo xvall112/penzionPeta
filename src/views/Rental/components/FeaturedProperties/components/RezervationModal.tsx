@@ -238,8 +238,7 @@ export default function RezervationModal({ title, price, calendarId }) {
           <Box mt={3}>
             <form
               name="RezervacniFormular"
-              method="POST"
-              netlify-honeypot="bot-field"
+              method="post"
               onSubmit={formik.handleSubmit}
               data-netlify="true"
             >
@@ -248,7 +247,7 @@ export default function RezervationModal({ title, price, calendarId }) {
                 name="form-name"
                 value="RezervacniFormular"
               />
-              <input type="hidden" name="bot-field" />
+
               <Grid container spacing={4}>
                 <Grid
                   item
