@@ -242,11 +242,7 @@ export default function RezervationModal({ title, price, calendarId }) {
               name="RezervacniFormular"
               method="POST"
             >
-              <input
-                type="hidden"
-                name="form-name"
-                value="RezervacniFormular"
-              />
+              <input type="hidden" name="RezervacniFormular" value="contact" />
               <Grid container spacing={4}>
                 <Grid
                   item
