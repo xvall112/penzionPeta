@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useStaticQuery, graphql, Link } from 'gatsby';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import cogoToast from 'cogo-toast';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
@@ -60,6 +61,12 @@ export const query = graphql`
     }
   }
 `;
+
+const encode = (data) => {
+  return Object.keys(data)
+    .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+    .join('&');
+};
 
 const validationSchema = yup.object({
   prijezd: yup
