@@ -1,0 +1,45 @@
+## Created with gatsby-plugin-netlify
+
+/*
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: same-origin
+/public/**/*.html
+  cache-control: public
+  cache-control:  max-age=0
+  cache-control: must-revalidate
+/public/page-data/*
+  cache-control: public
+  cache-control:  max-age=0
+  cache-control: must-revalidate
+/component---src-pages-404-tsx-cfc54d4034a0803fd9ff.js
+  Cache-Control: public, max-age=31536000, immutable
+/f82d67015ae8490ac770b6da6efe9ee703730360-09ba9857f955348240e2.js
+  Cache-Control: public, max-age=31536000, immutable
+/0619548e51a7c9e5a31f8217d2a55f3de8dc8397-e90a8b90144c29d11b15.js
+  Cache-Control: public, max-age=31536000, immutable
+/component---src-pages-index-tsx-fb7c369a63429238dd00.js
+  Cache-Control: public, max-age=31536000, immutable
+/447e53936e18c2cad6ad2d98d6d9528fbf4a1844-6acc9222d2bbfd0be5e7.js
+  Cache-Control: public, max-age=31536000, immutable
+/component---src-pages-obchodni-podminky-tsx-27d96c1f8b9e39bf1900.js
+  Cache-Control: public, max-age=31536000, immutable
+/component---src-pages-prodej-tsx-44c74d64e066de96a991.js
+  Cache-Control: public, max-age=31536000, immutable
+/component---src-pages-ubytovaci-rad-tsx-616943973b28afcd03e3.js
+  Cache-Control: public, max-age=31536000, immutable
+/component---src-pages-zpracovani-osobnich-udaju-tsx-fe3ff240a7e14c63a080.js
+  Cache-Control: public, max-age=31536000, immutable
+/webpack-runtime-88ca3d4e92f10b5af2be.js
+  Cache-Control: public, max-age=31536000, immutable
+/framework-61e05952f22ba8c608ec.js
+  Cache-Control: public, max-age=31536000, immutable
+/styles.e23b6078c2c2d913b343.css
+  Cache-Control: public, max-age=31536000, immutable
+/app-ff33c6023dcc494aa892.js
+  Cache-Control: public, max-age=31536000, immutable
+/static/*
+  Cache-Control: public, max-age=31536000, immutable
+/sw.js
+  Cache-Control: no-cache
