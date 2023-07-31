@@ -232,6 +232,7 @@ const FeaturedProperties = ({ data }): JSX.Element => {
                     </Typography>
                   </Box> */}
                 </CardContent>
+                <Box display={'flex'} flexGrow={1} />
                 <CardActions>
                   <Box width="100%">
                     <Grid container spacing={1}>
