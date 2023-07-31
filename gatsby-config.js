@@ -37,6 +37,7 @@ module.exports = {
           '20905e3bb9284a1ac13e2615c11a06aad66cc83c5fbfcd691b2f8ca201f2f129@group.calendar.google.com',
           '455c42f3b8736fb4abfd92c70eb6ed9f1a8261c8a09e797439dc4d83b78ccc07@group.calendar.google.com',
           '8e9dc68a7a4ea6b92cd1bc19daac83091cfa37e8fa3cd689d7ab8c2d97eef091@group.calendar.google.com',
+          '5cff0b49873acded70edc214d23d22ef9dbe4286fba36ea014132d3db1da6dbb@group.calendar.google.com',
         ],
         // options to retrieve the next 10 upcoming events
         timeMin: new Date().toISOString(),
